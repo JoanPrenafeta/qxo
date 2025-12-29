@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <title data-i18n-key="page_title">Joan Prenafeta | Cool portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="theme/custom.css">
+    <script src="https://kit.fontawesome.com/78cae735db.js" crossorigin="anonymous"></script>
+    <script src="https://joanprenafeta.github.io/Awesome-Tools/scripts/colors.js" defer></script>
+    <script src="scripts/page.js" defer></script>
+    <script src="scripts/language.js" defer></script>
+    <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon/site.webmanifest" />
+</head>
+<body class="portada" id="body">
+    <header>
+        <div>
+          <a href="#main" class="sr-only" id="main-redirection" target="_self" data-i18n-key="skip_to_main_content">Anar al contingut principal</a>
+        </div>
+    </header>
+    
+    <div>
+        <h1 class="" aria-label="Quality experience output">QXO</h1>
+        <aside class="left-col">
+            <h2>Paràmetres</h2>
+            <form onsubmit="applyChanges(event)">
+                <div class="field generic-field">
+                    <label for="select-create">Que t'agradaria crear?</label>
+                    <select id="select-create" name="country" aria-describedby="select-create-help">
+                    <option value="" disabled selected>Camps d'entrada, multimèdia...</option>
+                    <option value="input">Camp d'entrada</option>
+                    <option value="img">Imatge</option>
+                    <option value="clickable">Element clicable</option>
+                    <option value="select">Llista desplegable</option>
+                    </select>
+                    <small id="select-create-help" class="help-text">A partir d'aquesta selecció, es carregaran les preguntes necessàries per generar el codi.</small>
+                </div>
+
+                <div class="field generic-field">
+                    <label for="input-id">Com s'identificarà?</label>
+                    <input type="text" id="input-id" name="id" placeholder="nom" aria-invalid="false" aria-describedby="input-id-help" required>
+                    <p id="input-id-error" class="error-message" role="alert" style="display: none;">L'identificador hauria de començar per una lletra. Preferentment amb minúscules. </p>
+                    <small id="input-id-help" class="help-text">L'identificador es necessari per poder identificar l'element, ja sigui en el codi front-end o en la fulla d'estils. Aquest ha de ser únic i no s'ha de repetir en tota la pàgina.</small>
+                </div>
+
+                <div class="field input-field">
+                    <fieldset>
+                        <legend>Quina mena de camp d'entrada?</legend>
+                        <ul>
+                            <li>
+                                <input type="radio"  id="input-type-text"  name="input-type"  value="text"  checked  >
+                                <label for="input-type-text">Entrada de text</label>
+                            </li>
+                            <li>
+                                <input type="radio"  id="input-type-textarea"  name="input-type"  value="textarea">
+                                <label for="input-type-textarea">Entrada de text llarg</label>
+                            </li>
+                            <li>
+                                <input type="radio"  id="input-type-email"  name="input-type"  value="email" >
+                                <label for="input-type-email">Correu electrònic</label>
+                            </li>
+                            <li>
+                                <input type="radio"  id="input-type-password"  name="input-type"  value="password" >
+                                <label for="input-type-password">Contrassenya</label>
+                            </li>
+                            <li>
+                                <input type="radio"  id="input-type-checkbox"  name="input-type"  value="checkbox" >
+                                <label for="input-type-checkbox">Casella de verificació</label>
+                            </li>
+                        </ul>
+                        <small id="input-type-id-help" class="help-text">Tot i que puguin mostrar-se similars, cada input té les seves propietats.</small>
+                    </fieldset>
+                </div>
+
+                <div class="field input-field">
+                    <label for="input-label">Què esperes obtenir?</label>
+                    <input type="text" id="input-label" name="name" placeholder="Nom"  aria-invalid="false" aria-describedby="input-label-help" >
+                    <p id="input-label-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-label-help" class="help-text">Aquest camp farà referencia al títol que apareixerà al camp. Aquest sempre ha de ser visible per l'usuari.</small>
+                </div>
+                
+                <div class="field input-field">
+                    <input type="checkbox"  id="input-required"  name="required"  aria-describedby="input-required-help" >
+                    <label for="input-required">És obligatori?</label>
+                    <small id="input-required-help" class="help-text">Marca'l sols si el camp es estrictament necessari per continuar.</small>
+                </div>
+
+                <div class="field input-field">
+                    <label for="input-placeholder">Pots donar una exemple?</label>
+                    <input type="text" id="input-placeholder" name="placeholder" placeholder="Joan Prenafeta"  aria-invalid="false" aria-describedby="input-placeholder-help" >
+                    <p id="input-placeholder-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-placeholder-help" class="help-text">Aquest camp serveix per facilitar la comprensió i entrada del camp.</small>
+                </div>
+
+                <div class="field input-field">
+                    <label for="input-description">Per a què serveix aquest camp?</label>
+                    <textarea id="input-description" name="description" placeholder="Aquest camp serveix per..."  aria-invalid="false" aria-describedby="input-description-help" ></textarea>
+                    <p id="input-descriptionr-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-description-help" class="help-text">Aquest camp fa referència a la descripció que hi ha d'haver a l'input (després pots ocultar-lo).</small>
+                </div>
+
+                <div class="field input-field">
+                    <input type="checkbox"  id="input-show-description"  name="show-description"  aria-describedby="input-show-description-help" >
+                    <label for="input-show-description">S'ha de mostrar la descripció?</label>
+                    <small id="input-show-description-help" class="help-text">La descripció estarà igualment pels lectors de pantalla, però serà invisible en l'àmbit visual.</small>
+                </div>
+
+                <div class="field input-field">
+                    <label for="input-error">Missatge d'error</label>
+                    <input type="text" id="input-error" name="error" placeholder="Aquest camp es obligatori"  aria-invalid="false" aria-describedby="input-error-help" >
+                    <p id="input-error-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-error-help" class="help-text">En cas de tenir una entrada incorrecta, s'ha de mostrar un missatge d'error que ajudi a entendre per què és incorrecte i, si és possible, suggerir una resposta vàlida.</small>
+                </div>
+
+                <input type="submit" value="Aplica els canvis">
+            </form>
+        </aside>
+        <main id="main" class="main-col">
+            <section id="tips">
+                <h2>Tips</h2>
+                <ul class="tips-list">
+                    <li class="active">
+                        <span>Utilitza sempre elements HTML semàntics (button, a, input, nav, header, main...) de recórrer a ARIA.</span>
+                    </li>
+                </ul>
+            </section>
+            <section id="preview">
+                <div id="prototype-preview">
+                </div>
+                <span id="version">QXO: 0.0.1</span>
+            </section>
+
+            <section>
+                <label for="code-preview">Previsualitzador de codi html</label>
+                <textarea id="code-preview" name="css" placeholder="Aquest camp serveix per..."  aria-invalid="false" aria-describedby="code-preview-help" ></textarea>
+                <small id="code-preview-help" class="help-text">Aqui pots visualitzar el codi html referent al component utilitzat.</small>
+            </section>
+
+        </main>
+        <aside class="right-col">
+            <h2>Propietats</h2>
+
+            <div class="field">
+                <label for="input-css">Custom.css</label>
+                <textarea id="input-css" name="css" placeholder=""  aria-invalid="false" aria-describedby="input-css-help" ></textarea>
+                <p id="input-css-error" class="error-message" role="alert" style="display: none;"></p>
+                <small id="input-css-help" class="help-text">Tens un full d'estils o vols adaptar al màxim com es veurà aquest element? Aquí pots introduir els estils CSS que necessitis.</small>
+            </div>
+            <div class="field">
+                <label for="input-classes">Classes html</label>
+                <input type="text" id="input-classes" name="classes" placeholder="Ex. sr-only"  aria-invalid="false" aria-describedby="input-classes-help" >
+                <p id="input-classes-error" class="error-message" role="alert" style="display: none;"></p>
+                <small id="input-classes-help" class="help-text">Necessites aplicar algunes classes? Recorda introduir-les al custom.css</small>
+                <ul id="classes-tags" class="unstyled-list">
+                </ul>
+            </div>
+            <div class="field">
+                <fieldset>
+                        <legend>Estats</legend>
+                        <ul>
+                            <li>
+                                <input type="checkbox"  id="input-disabled"  name="disabled">
+                                <label for="input-disabled">Deshabilitat</label>
+                            </li>
+                            <li>
+                                <input type="checkbox"  id="input-hover"  name="hover">
+                                <label for="input-hover">Hover</label>
+                            </li>
+                            <li>
+                                <input type="checkbox"  id="input-focus"  name="focus">
+                                <label for="input-focus">Focus</label>
+                            </li>
+                            <li>
+                                <input type="checkbox"  id="input-entrada-incorrecta"  name="entrada-incorrecta">
+                                <label for="input-entrada-incorrecta">Entrada incorrecta</label>
+                            </li>
+                        </ul>
+                    </fieldset>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
