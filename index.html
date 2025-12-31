@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-    <title data-i18n-key="page_title">Joan Prenafeta | Cool portfolio</title>
+    <title>Quality experience output</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -17,20 +17,14 @@
     <link rel="manifest" href="img/favicon/site.webmanifest" />
 </head>
 <body class="portada" id="body">
-    <header>
-        <div>
-          <a href="#main" class="sr-only" id="main-redirection" target="_self" data-i18n-key="skip_to_main_content">Anar al contingut principal</a>
-        </div>
-    </header>
-    
-    <div>
+    <a href="#main" class="sr-only" id="main-redirection" target="_self" data-i18n-key="skip_to_main_content">Anar al contingut principal</a>    
         <h1 class="" aria-label="Quality experience output">QXO</h1>
         <aside class="left-col">
             <h2>Paràmetres</h2>
             <form onsubmit="applyChanges(event)">
                 <div class="field generic-field">
                     <label for="select-create">Que t'agradaria crear?</label>
-                    <select id="select-create" name="country" aria-describedby="select-create-help">
+                    <select id="select-create" required name="country" aria-describedby="select-create-help">
                     <option value="" disabled selected>Camps d'entrada, multimèdia...</option>
                     <option value="input">Camp d'entrada</option>
                     <option value="img">Imatge</option>
@@ -50,26 +44,36 @@
                 <div class="field input-field">
                     <fieldset>
                         <legend>Quina mena de camp d'entrada?</legend>
-                        <ul>
+                        <ul class="unstyled-list">
                             <li>
-                                <input type="radio"  id="input-type-text"  name="input-type"  value="text"  checked  >
-                                <label for="input-type-text">Entrada de text</label>
+                                <div class="inline-input">
+                                    <input type="radio"  id="input-type-text"  name="input-type"  value="text"  checked  >
+                                    <label for="input-type-text">Entrada de text</label>
+                                </div>
                             </li>
                             <li>
+                                <div class="inline-input">
                                 <input type="radio"  id="input-type-textarea"  name="input-type"  value="textarea">
                                 <label for="input-type-textarea">Entrada de text llarg</label>
+                                </div>
                             </li>
                             <li>
+                                <div class="inline-input">
                                 <input type="radio"  id="input-type-email"  name="input-type"  value="email" >
                                 <label for="input-type-email">Correu electrònic</label>
+                                </div>
                             </li>
                             <li>
+                                <div class="inline-input">
                                 <input type="radio"  id="input-type-password"  name="input-type"  value="password" >
                                 <label for="input-type-password">Contrassenya</label>
+                                </div>
                             </li>
                             <li>
+                                <div class="inline-input">
                                 <input type="radio"  id="input-type-checkbox"  name="input-type"  value="checkbox" >
                                 <label for="input-type-checkbox">Casella de verificació</label>
+                                </div>
                             </li>
                         </ul>
                         <small id="input-type-id-help" class="help-text">Tot i que puguin mostrar-se similars, cada input té les seves propietats.</small>
@@ -78,14 +82,16 @@
 
                 <div class="field input-field">
                     <label for="input-label">Què esperes obtenir?</label>
-                    <input type="text" id="input-label" name="name" placeholder="Nom"  aria-invalid="false" aria-describedby="input-label-help" >
+                    <input type="text" id="input-label" name="label" placeholder="Nom"  aria-invalid="false" aria-describedby="input-label-help" >
                     <p id="input-label-error" class="error-message" role="alert" style="display: none;"></p>
                     <small id="input-label-help" class="help-text">Aquest camp farà referencia al títol que apareixerà al camp. Aquest sempre ha de ser visible per l'usuari.</small>
                 </div>
                 
                 <div class="field input-field">
+                    <div class="inline-input">
                     <input type="checkbox"  id="input-required"  name="required"  aria-describedby="input-required-help" >
                     <label for="input-required">És obligatori?</label>
+                    </div>
                     <small id="input-required-help" class="help-text">Marca'l sols si el camp es estrictament necessari per continuar.</small>
                 </div>
 
@@ -104,8 +110,10 @@
                 </div>
 
                 <div class="field input-field">
+                    <div class="inline-input">
                     <input type="checkbox"  id="input-show-description"  name="show-description"  aria-describedby="input-show-description-help" >
                     <label for="input-show-description">S'ha de mostrar la descripció?</label>
+                    </div>
                     <small id="input-show-description-help" class="help-text">La descripció estarà igualment pels lectors de pantalla, però serà invisible en l'àmbit visual.</small>
                 </div>
 
@@ -116,27 +124,52 @@
                     <small id="input-error-help" class="help-text">En cas de tenir una entrada incorrecta, s'ha de mostrar un missatge d'error que ajudi a entendre per què és incorrecte i, si és possible, suggerir una resposta vàlida.</small>
                 </div>
 
-                <input type="submit" value="Aplica els canvis">
+                <input type="submit" value="Aplica els canvis" class="btn btn-primary">
             </form>
         </aside>
         <main id="main" class="main-col">
             <section id="tips">
                 <h2>Tips</h2>
-                <ul class="tips-list">
+                <ul class="tips-list unstyled-list">
                     <li class="active">
-                        <span>Utilitza sempre elements HTML semàntics (button, a, input, nav, header, main...) de recórrer a ARIA.</span>
+                        <span>1. Utilitza sempre elements HTML semàntics (button, a, input, nav, header, main...) de recórrer a ARIA.</span>
+                    </li>
+                    <li class="">
+                        <span>2. Utilitza sempre elements HTML semàntics (button, a, input, nav, header, main...) de recórrer a ARIA.</span>
+                    </li>
+                    <li class="">
+                        <span>3. Utilitza sempre elements HTML semàntics (button, a, input, nav, header, main...) de recórrer a ARIA.</span>
+                    </li>
+                    <li class="">
+                        <span>4. Utilitza sempre elements HTML semàntics (button, a, input, nav, header, main...) de recórrer a ARIA.</span>
                     </li>
                 </ul>
+                <button class="btn btn-primary">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <span class="sr-only">Consell anterior</span>
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span class="sr-only">Consell següent</span>
+                </button>
             </section>
             <section id="preview">
                 <div id="prototype-preview">
+                    <div class="field">
+                        
+                    </div>
                 </div>
+                <button id="toggleDark">
+                    <span class="sr-only" data-i18n-key="toggle_theme_sr_only">Canvia entre mode clar i fosc</span>
+                    <i class="fa-solid fa-moon"></i>
+                    <i class="fa-solid fa-sun"></i>
+                </button>
                 <span id="version">QXO: 0.0.1</span>
             </section>
 
-            <section>
+            <section id="code" class="field">
                 <label for="code-preview">Previsualitzador de codi html</label>
-                <textarea id="code-preview" name="css" placeholder="Aquest camp serveix per..."  aria-invalid="false" aria-describedby="code-preview-help" ></textarea>
+                <textarea id="code-preview" name="css" placeholder=""  aria-invalid="false" aria-describedby="code-preview-help"  rows="5"></textarea>
                 <small id="code-preview-help" class="help-text">Aqui pots visualitzar el codi html referent al component utilitzat.</small>
             </section>
 
@@ -161,27 +194,34 @@
             <div class="field">
                 <fieldset>
                         <legend>Estats</legend>
-                        <ul>
+                        <ul class="unstyled-list">
                             <li>
+                                <div class="inline-input">
                                 <input type="checkbox"  id="input-disabled"  name="disabled">
                                 <label for="input-disabled">Deshabilitat</label>
+                                </div>
                             </li>
                             <li>
+                                <div class="inline-input">
                                 <input type="checkbox"  id="input-hover"  name="hover">
                                 <label for="input-hover">Hover</label>
+                                </div>
                             </li>
                             <li>
+                                <div class="inline-input">
                                 <input type="checkbox"  id="input-focus"  name="focus">
                                 <label for="input-focus">Focus</label>
+                                </div>
                             </li>
                             <li>
+                                <div class="inline-input">
                                 <input type="checkbox"  id="input-entrada-incorrecta"  name="entrada-incorrecta">
                                 <label for="input-entrada-incorrecta">Entrada incorrecta</label>
+                                </div>
                             </li>
                         </ul>
                     </fieldset>
             </div>
         </aside>
-    </div>
 </body>
 </html>
