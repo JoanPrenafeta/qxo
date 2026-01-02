@@ -17,7 +17,9 @@ function applyChanges(event) {
         case "password":
             str=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
             break;
-    
+        case "checkbox":
+            str=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+            break;
         default:
             break;
     }
@@ -29,7 +31,7 @@ function applyChanges(event) {
 function generateTextbox(id,label,placeholder,required, description,showDescription){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="text" id="'+id+'" name="'+id+'"';
+    output += '<input type="text" id="'+id+'" name="'+id+'" ';
     if (required ="on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
     output += '<small id="'+id+'-help"';
@@ -40,7 +42,7 @@ function generateTextbox(id,label,placeholder,required, description,showDescript
 function generateTextarea(id,label,placeholder,required, description,showDescription){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<textarea id="'+id+'" name="'+id+'"';
+    output += '<textarea id="'+id+'" name="'+id+'" ';
     if (required ="on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help"></textarea>\n';
     output += '<small id="'+id+'-help"';
@@ -51,7 +53,7 @@ function generateTextarea(id,label,placeholder,required, description,showDescrip
 function generateEmail(id,label,placeholder,required, description,showDescription){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="email" id="'+id+'" name="'+id+'"';
+    output += '<input type="email" id="'+id+'" name="'+id+'" ';
     if (required ="on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
     output += '<small id="'+id+'-help"';
@@ -62,12 +64,30 @@ function generateEmail(id,label,placeholder,required, description,showDescriptio
 function generatePassword(id,label,placeholder,required, description,showDescription){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="password" id="'+id+'" name="'+id+'"';
+    output += '<input type="password" id="'+id+'" name="'+id+'" ';
     if (required="on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help" data-visible="false">\n';
     output += '<small id="'+id+'-help"';
     if (showDescription!="on") output+=' class="sr-only" ';
     output += '>'+description+'</small>';
+    return output;
+}
+
+function generateCheckbox(id,label,required, description,showDescription){
+    var output = '<div class="inline-input">';
+    output += '<label for="'+id+'">'+label+'</label>\n';
+    output += '<input type="password" id="'+id+'" name="'+id+'" ';
+    if (required="on") output+=" required "
+    output += ' aria-describedby="'+id+'-help" data-visible="false">\n';
+    output += '<small id="'+id+'-help"';
+    if (showDescription!="on") output+=' class="sr-only" ';
+    output += '>'+description+'</small>';
+    output += '</div>'
+    /*<div class="inline-input">
+                    <input type="checkbox"  id="input-show-description"  name="show-description"  aria-describedby="input-show-description-help" >
+                    <label for="input-show-description">S'ha de mostrar la descripció?</label>
+                    </div>
+                    <small id="input-show-description-help" class="help-text">La descripció estarà igualment pels lectors de pantalla, però serà invisible en l'àmbit visual.</small>*/
     return output;
 }
 

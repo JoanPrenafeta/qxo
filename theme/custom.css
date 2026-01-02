@@ -341,8 +341,7 @@ a#main-redirection:focus{
 body{
     display: flex;
     flex-direction: row;
-    gap: var(--base-gap);
-    padding: 1rem;
+    padding: 0;
     justify-content: stretch;
     align-items: stretch;
     max-height: 100dvh;
@@ -355,6 +354,7 @@ body aside{
     background-color: var(--page-bg);
     box-shadow: var(--base-shadow);
     overflow-y: auto;
+    margin: 1rem;
   }
   aside h2{
     margin-bottom: 1rem;
@@ -374,6 +374,8 @@ main{
     display: flex;
     flex-direction: column;
     gap: var(--base-gap);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 main #tips{
     display: flex;
