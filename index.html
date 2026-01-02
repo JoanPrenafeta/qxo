@@ -24,7 +24,7 @@
             <form onsubmit="applyChanges(event)">
                 <div class="field generic-field">
                     <label for="select-create">Que t'agradaria crear?</label>
-                    <select id="select-create" required name="country" aria-describedby="select-create-help">
+                    <select id="select-create" name="select-create" aria-describedby="select-create-help" required>
                     <option value="" disabled selected>Camps d'entrada, multimèdia...</option>
                     <option value="input">Camp d'entrada</option>
                     <option value="img">Imatge</option>
@@ -34,50 +34,24 @@
                     <small id="select-create-help" class="help-text">A partir d'aquesta selecció, es carregaran les preguntes necessàries per generar el codi.</small>
                 </div>
 
-                <div class="field generic-field">
-                    <label for="input-id">Com s'identificarà?</label>
-                    <input type="text" id="input-id" name="id" placeholder="nom" aria-invalid="false" aria-describedby="input-id-help" required>
-                    <p id="input-id-error" class="error-message" role="alert" style="display: none;">L'identificador hauria de començar per una lletra. Preferentment amb minúscules. </p>
-                    <small id="input-id-help" class="help-text">L'identificador es necessari per poder identificar l'element, ja sigui en el codi front-end o en la fulla d'estils. Aquest ha de ser únic i no s'ha de repetir en tota la pàgina.</small>
+                <div class="field input-field">
+                    <label for="select-type">Quina mena de camp d'entrada?</label>
+                    <select id="select-type" name="select-type" aria-describedby="select-type-help">
+                        <option value="text">Entrada de text</option>
+                        <option value="number">Entrada numèrica</option>
+                        <option value="textarea">Entrada de text llarg</option>
+                        <option value="email">Correu electrònic</option>
+                        <option value="password">Contrassenya</option>
+                        <option value="radio">Casella de verificació</option>
+                    </select>
+                    <small id="select-type-help" class="help-text">Tot i que puguin mostrar-se similars, cada input té les seves propietats.</small>
                 </div>
 
                 <div class="field input-field">
-                    <fieldset>
-                        <legend>Quina mena de camp d'entrada?</legend>
-                        <ul class="unstyled-list">
-                            <li>
-                                <div class="inline-input">
-                                    <input type="radio"  id="input-type-text"  name="input-type"  value="text"  checked  >
-                                    <label for="input-type-text">Entrada de text</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="inline-input">
-                                <input type="radio"  id="input-type-textarea"  name="input-type"  value="textarea">
-                                <label for="input-type-textarea">Entrada de text llarg</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="inline-input">
-                                <input type="radio"  id="input-type-email"  name="input-type"  value="email" >
-                                <label for="input-type-email">Correu electrònic</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="inline-input">
-                                <input type="radio"  id="input-type-password"  name="input-type"  value="password" >
-                                <label for="input-type-password">Contrassenya</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="inline-input">
-                                <input type="radio"  id="input-type-checkbox"  name="input-type"  value="checkbox" >
-                                <label for="input-type-checkbox">Casella de verificació</label>
-                                </div>
-                            </li>
-                        </ul>
-                        <small id="input-type-id-help" class="help-text">Tot i que puguin mostrar-se similars, cada input té les seves propietats.</small>
-                    </fieldset>
+                    <label for="input-id">Com s'identificarà?</label>
+                    <input type="text" id="input-id" name="id" placeholder="nom" aria-invalid="false" aria-describedby="input-id-help">
+                    <p id="input-id-error" class="error-message" role="alert" style="display: none;">L'identificador hauria de començar per una lletra. Preferentment amb minúscules. </p>
+                    <small id="input-id-help" class="help-text">L'identificador es necessari per poder identificar l'element, ja sigui en el codi front-end o en la fulla d'estils. Aquest ha de ser únic i no s'ha de repetir en tota la pàgina.</small>
                 </div>
 
                 <div class="field input-field">
@@ -117,6 +91,35 @@
                     <small id="input-show-description-help" class="help-text">La descripció estarà igualment pels lectors de pantalla, però serà invisible en l'àmbit visual.</small>
                 </div>
 
+                <div class="field input-field custom-field">
+                    <label for="input-lenght">Quants caràcters pot tenir com a màxim?</label>
+                    <input type="number" id="input-lenght" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lenght-help" >
+                    <p id="input-lenght-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+
+                <div class="field input-field custom-field">
+                    <label for="input-lines">Quants línies de text pot tenir com a màxim?</label>
+                    <input type="number" id="input-lines" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lines-help" >
+                    <p id="input-lines-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de línies de text que es mostrarà com a màxim. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+                
+                <div class="field input-field custom-field">
+                    <label for="input-lenght">Quants caràcters pot tenir com a màxim?</label>
+                    <input type="number" id="input-lenght" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lenght-help" >
+                    <p id="input-lenght-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+                
+                <div class="field input-field custom-field">
+                    <label for="input-lenght">Quants caràcters pot tenir com a màxim?</label>
+                    <input type="number" id="input-lenght" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lenght-help" >
+                    <p id="input-lenght-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+
+
                 <div class="field input-field">
                     <label for="input-error">Missatge d'error</label>
                     <input type="text" id="input-error" name="error" placeholder="Aquest camp es obligatori"  aria-invalid="false" aria-describedby="input-error-help" >
@@ -124,7 +127,7 @@
                     <small id="input-error-help" class="help-text">En cas de tenir una entrada incorrecta, s'ha de mostrar un missatge d'error que ajudi a entendre per què és incorrecte i, si és possible, suggerir una resposta vàlida.</small>
                 </div>
 
-                <input type="submit" value="Aplica els canvis" class="btn btn-primary">
+                <input id="submit-form" type="submit" value="Aplica els canvis" class="btn btn-primary">
             </form>
         </aside>
         <main id="main" class="main-col">

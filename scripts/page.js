@@ -2,11 +2,14 @@ function applyChanges(event) {
 // Evita que el formulari enviï les dades i recarregui la pàgina
     event.preventDefault(); 
     const formData = new FormData(event.target);
-    debugger
     var str="";
-    switch (formData.get("input-type")) {
+    updateFields(formData);
+    switch (formData.get("select-type")) {
         case "text":
             str=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+            break;
+        case "number":
+            str=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
             break;
         case "email":
             str=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
@@ -27,15 +30,80 @@ function applyChanges(event) {
     $("#code-preview").val(str)
     $("#prototype-preview .field").html(str)
 }
+const formulari = document.querySelector('form');
+function updateFields(form=null){
+    if (form==null && formulari!=null){
+        $(formulari).find(".field").hide();
+        $(formulari).find(".generic-field").show();
+
+    }
+    else{
+        $(formulari).find("#input-id").attr("required", false)
+        switch (form.get("select-create")) {
+            case "input":
+                $(formulari).find("#input-id").attr("required", true)
+                $(formulari).find(".field").hide();
+                $(formulari).find(".generic-field").show();
+                $(formulari).find(".input-field").show();
+                debugger
+                $(formulari).find(".input-field.custom-field").hide();
+                switch (form.get("select-type")) {
+                    case "text":
+                        break;
+                    case "number":
+                        break;
+                    case "email":
+                        break;
+                    case "textarea":
+                        $(formulari).find('.input-field:has("#input-lenght")').show();
+                        $(formulari).find('.input-field:has("#input-lines")').show();
+                        $(formulari).find('.input-field:has("#input-cols")').show();
+                        $(formulari).find('.input-field:has("#input-resize")').show();
+                        break;
+                    case "password":
+                        break;
+                    case "checkbox":
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}
+updateFields()
+
+let timeout;
+formulari.addEventListener('input', (event) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        $("#submit-form").click();
+    }, 300);
+});
+
+
 
 function generateTextbox(id,label,placeholder,required, description,showDescription){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="text" id="'+id+'" name="'+id+'" ';
-    if (required ="on") output+=" required "
+    if (required == "on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
     output += '<small id="'+id+'-help"';
-    if (showDescription!="on")  output+=' class="sr-only" ';
+    if (showDescription!== "on")  output+=' class="sr-only" ';
+    output += '>'+description+'</small>';
+    return output;
+}
+function generateNumber(id,label,placeholder,required, description,showDescription){
+    var output = "";
+    output += '<label for="'+id+'">'+label+'</label>\n';
+    output += '<input type="number" id="'+id+'" name="'+id+'" ';
+    if (required == "on") output+=" required "
+    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
+    output += '<small id="'+id+'-help"';
+    if (showDescription!== "on")  output+=' class="sr-only" ';
     output += '>'+description+'</small>';
     return output;
 }
@@ -43,10 +111,10 @@ function generateTextarea(id,label,placeholder,required, description,showDescrip
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<textarea id="'+id+'" name="'+id+'" ';
-    if (required ="on") output+=" required "
+    if (required == "on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help"></textarea>\n';
     output += '<small id="'+id+'-help"';
-    if (showDescription!="on")  output+=' class="sr-only" ';
+    if (showDescription!== "on")  output+=' class="sr-only" ';
     output += '>'+description+'</small>';
     return output;
 }
@@ -54,10 +122,10 @@ function generateEmail(id,label,placeholder,required, description,showDescriptio
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="email" id="'+id+'" name="'+id+'" ';
-    if (required ="on") output+=" required "
+    if (required == "on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
     output += '<small id="'+id+'-help"';
-    if (showDescription!="on")  output+=' class="sr-only" ';
+    if (showDescription!== "on")  output+=' class="sr-only" ';
     output += '>'+description+'</small>';
     return output;
 }
@@ -65,24 +133,24 @@ function generatePassword(id,label,placeholder,required, description,showDescrip
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="password" id="'+id+'" name="'+id+'" ';
-    if (required="on") output+=" required "
+    if (required== "on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help" data-visible="false">\n';
     output += '<small id="'+id+'-help"';
-    if (showDescription!="on") output+=' class="sr-only" ';
+    if (showDescription!== "on") output+=' class="sr-only" ';
     output += '>'+description+'</small>';
     return output;
 }
 
 function generateCheckbox(id,label,required, description,showDescription){
-    var output = '<div class="inline-input">';
-    output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="password" id="'+id+'" name="'+id+'" ';
-    if (required="on") output+=" required "
+    var output = '<div class="inline-input">\n';
+    output += '<input type="checkbox" id="'+id+'" name="'+id+'" ';
+    if (required== "on") output+=" required "
     output += ' aria-describedby="'+id+'-help" data-visible="false">\n';
+    output += '<label for="'+id+'">'+label+'</label>\n';
+    output += '</div>\n'
     output += '<small id="'+id+'-help"';
-    if (showDescription!="on") output+=' class="sr-only" ';
+    if (showDescription!== "on") output+=' class="sr-only" ';
     output += '>'+description+'</small>';
-    output += '</div>'
     /*<div class="inline-input">
                     <input type="checkbox"  id="input-show-description"  name="show-description"  aria-describedby="input-show-description-help" >
                     <label for="input-show-description">S'ha de mostrar la descripció?</label>

@@ -345,6 +345,7 @@ body{
     justify-content: stretch;
     align-items: stretch;
     max-height: 100dvh;
+    height: 100dvh;
   }
 
 body aside{
@@ -430,6 +431,18 @@ main #preview #version{
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+}
+
+.field:has(:required) label::after{
+    content: "";
+    background-color: var(--primary-accessible);
+    width: 0.5rem;
+    aspect-ratio: 1;
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    left: 4px;
+    border-radius: 1rem;
 }
 
 .field label,
