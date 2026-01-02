@@ -172,22 +172,11 @@ function generateCheckbox(id,label,required, description,showDescription){
 }
 
 function generateImage(image){
-    debugger
-
-    const fitxers = event.target.files;
-      
-      // Comprovem si hi ha algun fitxer seleccionat
-      if (fitxers && fitxers[0]) {
-        const fitxerImatge = fitxers[0];
-
-        // Creem una URL temporal que apunta al fitxer local
-        const objectURL = URL.createObjectURL(fitxerImatge);
-
-        // Assignem aquesta URL al src de la imatge
-        imatgePrevia.src = objectURL;
-        imatgePrevia.style.display = 'block';
-      }
-    
+    var output = "";
+    if (image!= null){
+        output += '<img src="'+image+'">'
+    }
+    return output
 }
 
 var starterPrimary = new Color(Colors.randomColor());
