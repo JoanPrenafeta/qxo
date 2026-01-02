@@ -4,27 +4,35 @@ function applyChanges(event) {
     const formData = new FormData(event.target);
     var str="";
     updateFields(formData);
-    switch (formData.get("select-type")) {
-        case "text":
-            str=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
-            break;
-        case "number":
-            str=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
-            break;
-        case "email":
-            str=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
-            break;
-        case "textarea":
-            str=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
-            break;
-        case "password":
-            str=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
-            break;
-        case "checkbox":
-            str=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"));
-            break;
-        default:
-            break;
+    switch (formData.get("select-create")) {
+        case "input":
+            switch (formData.get("select-type")) {
+                case "text":
+                    str=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    break;
+                case "number":
+                    str=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-min"),formData.get("input-max"));
+                    break;
+                case "email":
+                    str=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-pattern"));
+                    break;
+                case "textarea":
+                    str=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("select-resize"),formData.get("input-lines"),formData.get("input-length"));
+                    break;
+                case "password":
+                    str=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    break;
+                case "checkbox":
+                    str=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    break;
+                default:
+                    break;
+            }
+        break;
+        case "img":
+            str = generateImage(formData.get("input-src"));
+        break
+
     }
 
     $("#code-preview").val(str)
@@ -39,26 +47,27 @@ function updateFields(form=null){
     }
     else{
         $(formulari).find("#input-id").attr("required", false)
+        $(formulari).find(".field").hide();
+        $(formulari).find(".generic-field").show();
         switch (form.get("select-create")) {
             case "input":
-                $(formulari).find("#input-id").attr("required", true)
-                $(formulari).find(".field").hide();
-                $(formulari).find(".generic-field").show();
+                //$(formulari).find("#input-id").attr("required", true)
                 $(formulari).find(".input-field").show();
-                debugger
                 $(formulari).find(".input-field.custom-field").hide();
                 switch (form.get("select-type")) {
                     case "text":
                         break;
                     case "number":
+                        $(formulari).find('.input-field:has("#input-min")').show();
+                        $(formulari).find('.input-field:has("#input-max")').show();
                         break;
                     case "email":
+                        $(formulari).find('.input-field:has("#input-pattern")').show();
                         break;
                     case "textarea":
-                        $(formulari).find('.input-field:has("#input-lenght")').show();
+                        $(formulari).find('.input-field:has("#input-length")').show();
                         $(formulari).find('.input-field:has("#input-lines")').show();
-                        $(formulari).find('.input-field:has("#input-cols")').show();
-                        $(formulari).find('.input-field:has("#input-resize")').show();
+                        $(formulari).find('.input-field:has("#select-resize")').show();
                         break;
                     case "password":
                         break;
@@ -67,9 +76,13 @@ function updateFields(form=null){
                     default:
                         break;
                 }
-                break;
+            break;
+            case "img":
+                $(formulari).find(".image-field").show();
+
+            break;
             default:
-                break;
+            break;
         }
     }
 }
@@ -83,47 +96,52 @@ formulari.addEventListener('input', (event) => {
     }, 300);
 });
 
-
-
 function generateTextbox(id,label,placeholder,required, description,showDescription){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="text" id="'+id+'" name="'+id+'" ';
-    if (required == "on") output+=" required "
-    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
+    output += '<input type="text" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-help"'
+    if (required == "on") output+=" required"
+    output+='>\n';
     output += '<small id="'+id+'-help"';
     if (showDescription!== "on")  output+=' class="sr-only" ';
     output += '>'+description+'</small>';
     return output;
 }
-function generateNumber(id,label,placeholder,required, description,showDescription){
+function generateNumber(id,label,placeholder,required, description,showDescription, min, max){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="number" id="'+id+'" name="'+id+'" ';
-    if (required == "on") output+=" required "
-    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
+    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help"';
+    if (required == "on") output+=" required"
+    if(min != null && min.length>0) output+=' min="'+min+'"'
+    if(max != null && max.length>0) output+=' max="'+max+'"'
+    output+='>\n';
     output += '<small id="'+id+'-help"';
     if (showDescription!== "on")  output+=' class="sr-only" ';
     output += '>'+description+'</small>';
     return output;
 }
-function generateTextarea(id,label,placeholder,required, description,showDescription){
+function generateTextarea(id,label,placeholder,required, description,showDescription,resize,lines,maxChars){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<textarea id="'+id+'" name="'+id+'" ';
-    if (required == "on") output+=" required "
-    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help"></textarea>\n';
+    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help" style="resize:'+resize+';"'
+    if (required == "on") output+=" required"
+    if(lines != null && lines.length>0) output+=' rows="'+lines+'"'
+    if(maxChars!=null && maxChars.length>0) output+=' max-length="'+maxChars+'" aria-valuemax="'+maxChars+'" aria-valuenow="0"'
+    output+='></textarea>\n';
     output += '<small id="'+id+'-help"';
     if (showDescription!== "on")  output+=' class="sr-only" ';
     output += '>'+description+'</small>';
     return output;
 }
-function generateEmail(id,label,placeholder,required, description,showDescription){
+function generateEmail(id,label,placeholder,required, description,showDescription, pattern){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="email" id="'+id+'" name="'+id+'" ';
+    output += '<input type="email" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-help"'
     if (required == "on") output+=" required "
-    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help">\n';
+    if(pattern != null && pattern.length>0) output+=' pattern="'+pattern+'"'
+    output+='>\n';
     output += '<small id="'+id+'-help"';
     if (showDescription!== "on")  output+=' class="sr-only" ';
     output += '>'+description+'</small>';
@@ -140,23 +158,36 @@ function generatePassword(id,label,placeholder,required, description,showDescrip
     output += '>'+description+'</small>';
     return output;
 }
-
 function generateCheckbox(id,label,required, description,showDescription){
     var output = '<div class="inline-input">\n';
-    output += '<input type="checkbox" id="'+id+'" name="'+id+'" ';
+    output += '<input type="checkbox" id="'+id+'" name="'+id+'" aria-describedby="'+id+'-help""'
     if (required== "on") output+=" required "
-    output += ' aria-describedby="'+id+'-help" data-visible="false">\n';
+    output+='>\n';
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '</div>\n'
     output += '<small id="'+id+'-help"';
     if (showDescription!== "on") output+=' class="sr-only" ';
     output += '>'+description+'</small>';
-    /*<div class="inline-input">
-                    <input type="checkbox"  id="input-show-description"  name="show-description"  aria-describedby="input-show-description-help" >
-                    <label for="input-show-description">S'ha de mostrar la descripció?</label>
-                    </div>
-                    <small id="input-show-description-help" class="help-text">La descripció estarà igualment pels lectors de pantalla, però serà invisible en l'àmbit visual.</small>*/
     return output;
+}
+
+function generateImage(image){
+    debugger
+
+    const fitxers = event.target.files;
+      
+      // Comprovem si hi ha algun fitxer seleccionat
+      if (fitxers && fitxers[0]) {
+        const fitxerImatge = fitxers[0];
+
+        // Creem una URL temporal que apunta al fitxer local
+        const objectURL = URL.createObjectURL(fitxerImatge);
+
+        // Assignem aquesta URL al src de la imatge
+        imatgePrevia.src = objectURL;
+        imatgePrevia.style.display = 'block';
+      }
+    
 }
 
 var starterPrimary = new Color(Colors.randomColor());

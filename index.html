@@ -85,46 +85,68 @@
 
                 <div class="field input-field">
                     <div class="inline-input">
-                    <input type="checkbox"  id="input-show-description"  name="show-description"  aria-describedby="input-show-description-help" >
+                    <input type="checkbox" checked aria-checked="true" id="input-show-description"  name="show-description"  aria-describedby="input-show-description-help" >
                     <label for="input-show-description">S'ha de mostrar la descripció?</label>
                     </div>
                     <small id="input-show-description-help" class="help-text">La descripció estarà igualment pels lectors de pantalla, però serà invisible en l'àmbit visual.</small>
                 </div>
-
-                <div class="field input-field custom-field">
-                    <label for="input-lenght">Quants caràcters pot tenir com a màxim?</label>
-                    <input type="number" id="input-lenght" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lenght-help" >
-                    <p id="input-lenght-error" class="error-message" role="alert" style="display: none;"></p>
-                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
-                </div>
-
-                <div class="field input-field custom-field">
-                    <label for="input-lines">Quants línies de text pot tenir com a màxim?</label>
-                    <input type="number" id="input-lines" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lines-help" >
-                    <p id="input-lines-error" class="error-message" role="alert" style="display: none;"></p>
-                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de línies de text que es mostrarà com a màxim. Deixa'l en blanc si no n'hi ha.</small>
-                </div>
-                
-                <div class="field input-field custom-field">
-                    <label for="input-lenght">Quants caràcters pot tenir com a màxim?</label>
-                    <input type="number" id="input-lenght" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lenght-help" >
-                    <p id="input-lenght-error" class="error-message" role="alert" style="display: none;"></p>
-                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
-                </div>
-                
-                <div class="field input-field custom-field">
-                    <label for="input-lenght">Quants caràcters pot tenir com a màxim?</label>
-                    <input type="number" id="input-lenght" name="label" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lenght-help" >
-                    <p id="input-lenght-error" class="error-message" role="alert" style="display: none;"></p>
-                    <small id="input-lenght-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
-                </div>
-
 
                 <div class="field input-field">
                     <label for="input-error">Missatge d'error</label>
                     <input type="text" id="input-error" name="error" placeholder="Aquest camp es obligatori"  aria-invalid="false" aria-describedby="input-error-help" >
                     <p id="input-error-error" class="error-message" role="alert" style="display: none;"></p>
                     <small id="input-error-help" class="help-text">En cas de tenir una entrada incorrecta, s'ha de mostrar un missatge d'error que ajudi a entendre per què és incorrecte i, si és possible, suggerir una resposta vàlida.</small>
+                </div>
+                
+                <div class="field input-field custom-field">
+                    <label for="input-pattern">Ha de tenir algun format en concret?</label>
+                    <input type="text" id="input-pattern" name="placeholder" placeholder="[a-zA-Z0-9._%+-]+@mevaempresa\.cat$"  aria-invalid="false" aria-describedby="input-pattern-help" >
+                    <p id="input-pattern-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-pattern-help" class="help-text">Utilitza les expressions regulars per definir un format d'entrada. No és necessari verificar que s'insereixi el format correcte, ja que d'això s'encarrega el control nadiu. És útil si vols definir un filtratge per domini, per exemple.</small>
+                </div>
+
+                <div class="field input-field custom-field">
+                    <label for="input-length">Quants caràcters pot tenir com a màxim?</label>
+                    <input type="number" id="input-length" name="input-length" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-length-help" >
+                    <p id="input-length-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-length-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+                <div class="field input-field custom-field">
+                    <label for="input-min">Quin valor pot tenir com a mínim?</label>
+                    <input type="number" id="input-min" name="input-min" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-min-help" >
+                    <p id="input-min-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-min-help" class="help-text">No es podrà inserir un valor inferior al respòs en aquest camp. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+                <div class="field input-field custom-field">
+                    <label for="input-max">Quin valor pot tenir com a màxim?</label>
+                    <input type="number" id="input-max" name="input-max" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-max-help" >
+                    <p id="input-max-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-max-help" class="help-text">No es podrà inserir un valor superior al respòs en aquest camp. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+
+                <div class="field input-field custom-field">
+                    <label for="input-lines">Quants línies de s'han de mostrar com a mínim?</label>
+                    <input type="number" id="input-lines" name="input-lines" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lines-help" >
+                    <p id="input-lines-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-length-help" class="help-text">Aquest camp indica el número de línies de text que es mostrarà com a màxim. Deixa'l en blanc si no n'hi ha.</small>
+                </div>
+                
+                <div class="field input-field custom-field">
+                    <label for="select-resize">Es pot redimensionar</label>
+                    <select id="select-resize" name="select-resize" aria-describedby="select-resize-help">
+                        <option value="none">No</option>
+                        <option value="horizontal">Horitzontal</option>
+                        <option value="vertical">Vertical</option>
+                        <option value="both">Lliure</option>
+                    </select>
+                    <small id="select-resize-help" class="help-text">Tot i que puguin mostrar-se similars, cada input té les seves propietats.</small>
+                </div>
+
+                <div class="field image-field">
+                    <label for="input-src">Selecciona la imatge.</label>
+                    <input type="file" id="input-src" name="input-src" aria-describedby="input-src-help" accept="image/*">
+                    <p id="input-src-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-src-help" class="help-text">Aquesta imatge no es guardarà enlloc, sols es treballa de manera local.</small>
                 </div>
 
                 <input id="submit-form" type="submit" value="Aplica els canvis" class="btn btn-primary">
@@ -167,7 +189,7 @@
                     <i class="fa-solid fa-moon"></i>
                     <i class="fa-solid fa-sun"></i>
                 </button>
-                <span id="version">QXO: 0.0.1</span>
+                <span id="version">QXO: 0.0.2</span>
             </section>
 
             <section id="code" class="field">
