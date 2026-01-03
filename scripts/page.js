@@ -2,41 +2,44 @@ function applyChanges(event) {
 // Evita que el formulari enviï les dades i recarregui la pàgina
     event.preventDefault(); 
     const formData = new FormData(event.target);
+    var output="";
     var str="";
     updateFields(formData);
     switch (formData.get("select-create")) {
         case "input":
+            str += '<div class="field">'
             switch (formData.get("select-type")) {
                 case "text":
-                    str=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    output+=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
                     break;
                 case "number":
-                    str=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-min"),formData.get("input-max"));
+                    output+=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-min"),formData.get("input-max"));
                     break;
                 case "email":
-                    str=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-pattern"));
+                    output+=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-pattern"));
                     break;
                 case "textarea":
-                    str=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("select-resize"),formData.get("input-lines"),formData.get("input-length"));
+                    output+=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("select-resize"),formData.get("input-lines"),formData.get("input-length"));
                     break;
                 case "password":
-                    str=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    output+=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
                     break;
                 case "checkbox":
-                    str=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    output+=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"));
                     break;
                 default:
                     break;
             }
         break;
         case "img":
-            str = generateImage(formData.get("input-src"));
+                str += '<div class="media">'
+                output += generateImage(formData.get("input-src"), formData.get("input-decorative")=="on",  formData.get("input-alt"), formData.get("select-load"), formData.get("select-fit"))
         break
 
     }
-
-    $("#code-preview").val(str)
-    $("#prototype-preview .field").html(str)
+    str += output + "</div>"
+    $("#code-preview").val(output)
+    $("#prototype-preview").html(str)
 }
 const formulari = document.querySelector('form');
 function updateFields(form=null){
@@ -51,7 +54,6 @@ function updateFields(form=null){
         $(formulari).find(".generic-field").show();
         switch (form.get("select-create")) {
             case "input":
-                //$(formulari).find("#input-id").attr("required", true)
                 $(formulari).find(".input-field").show();
                 $(formulari).find(".input-field.custom-field").hide();
                 switch (form.get("select-type")) {
@@ -79,7 +81,9 @@ function updateFields(form=null){
             break;
             case "img":
                 $(formulari).find(".image-field").show();
-
+                $(formulari).find(".image-field.custom-field").hide();
+                if (form.get("input-decorative") =="on") $(formulari).find('.image-field:has("#input-alt")').hide();
+                else $(formulari).find('.image-field:has("#input-alt")').show();
             break;
             default:
             break;
@@ -171,11 +175,30 @@ function generateCheckbox(id,label,required, description,showDescription){
     return output;
 }
 
-function generateImage(image){
+function generateImage(image,decorative,alt,loading,fit){
     var output = "";
-    if (image!= null){
-        output += '<img src="'+image+'">'
+    output += '<img src="'+image+'"'
+    if (decorative) alt="";
+    output += ' alt="'+alt+'"';
+    switch (loading) {
+        case "eager":
+            output += ' loading="eager"'
+            break;
+        case "lazy":
+            output += ' loading="lazy"'
+            break;
+        case "async":
+            output += ' decoding="async"'
+            break;
+        case "high":
+            output += ' fetchpriority="high"'
+            break;
+        default:
+            break;
     }
+    output+=' style="object-fit: ' + fit + '"';
+    output += '>';
+
     return output
 }
 

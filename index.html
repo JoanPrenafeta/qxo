@@ -143,10 +143,47 @@
                 </div>
 
                 <div class="field image-field">
-                    <label for="input-src">Selecciona la imatge.</label>
+                    <label for="input-src">On es troba la imatge?</label>
                     <input type="text" id="input-src" name="input-src" aria-describedby="input-src-help" value="https://imgs.search.brave.com/NZMHgzsU1dqAkk_bE0-rQigss0x1BUOPeqk-gHZq2jc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzYzLzhi/LzA0LzYzOGIwNDBl/NTc1ODgyOTAyYTI2/YjFiZDNkMTU3ZTFi/LmpwZw">
                     <p id="input-src-error" class="error-message" role="alert" style="display: none;"></p>
                     <small id="input-src-help" class="help-text">Aquesta imatge no es guardarà enlloc, sols es treballa de manera local.</small>
+                </div>
+
+                <div class="field image-field">
+                    <div class="inline-input">
+                    <input type="checkbox" aria-checked="true" id="input-decorative"  name="input-decorative" checked aria-describedby="input-decorative-help" >
+                    <label for="input-decorative">Es una imatge decorativa?</label>
+                    </div>
+                    <small id="input-decorative-help" class="help-text">Si la imatge sols està per decorar i no per complementar la informació, el text alternatiu estarà buit. El text alternatiu sempre ha d'estar, encara que sigui en blanc.</small>
+                </div>
+
+                <div class="field image-field custom-field">
+                    <label for="input-alt">Què apareix a la imatge?</label>
+                    <input type="text" id="input-alt" name="input-alt" aria-describedby="input-alt-help">
+                    <p id="input-alt-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-alt-help" class="help-text">En cas de no ser una imatge decorativa, el text ha de descriure que hi apareix a la imatge. En cas de no poder-se visualitzar la imatge o usar lectors de pantalla. Es mostrarà com un text. Per tant, enlloc de dir: "Logotip de l'entitat" o "Oferta temporal", s'hauria de mostrar directament el que es llegira: "Entitat" o "Portàtil hp per 600€".</small>
+                </div>
+
+                <div class="field image-field">
+                    <label for="select-load">Com s'ha de carregar la imatge?</label>
+                    <select id="select-load" name="select-load" aria-describedby="select-load-help">
+                        <option value="eager" selected>Immediatament (Eager)</option>
+                        <option value="lazy">Quan aparegui a la pantalla (Lazy)</option>
+                        <option value="async">En segon pla (Async Decoding)</option>
+                        <option value="high">Amb prioritat alta (Fetch Priority)</option>
+                    </select>
+                    <small id="select-load-help" class="help-text">Per optimitzar la carrega inicial de la pàgina, es millor seleccionar com es carregaran els objectes més pesats.</small>
+                </div>
+
+                <div class="field image-field">
+                    <label for="select-fit">Com vols mostrar la imatge</label>
+                    <select id="select-fit" name="select-fit" aria-describedby="select-fit-help">
+                        <option value="contain" selected>Contenir (Contain)</option>
+                        <option value="cover">Cobrir (Cover)</option>
+                        <option value="fill">Omplir (Fill - Es deforma)</option>
+                        <option value="none">Mida real (None)</option>
+                    </select>
+                    <small id="select-fit-help" class="help-text">La imatge es deforma? Amb la propietat object-fit, pots escollir com es mostra la imatge</small>
                 </div>
 
                 <input id="submit-form" type="submit" value="Aplica els canvis" class="btn btn-primary">
