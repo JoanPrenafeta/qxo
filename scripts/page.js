@@ -265,9 +265,10 @@ function generateLink(linkType, href,span,newTab,tooltip,leftIcon, rightIcon){
 
     output +=">\n";
     if (leftIcon.length>0)output += leftIcon + "\n";
-    output +=span;
-    if (tooltip.length>0) output += '\n<span role="tooltip" id="tooltip" class="tooltip-text">'+tooltip+'</span>';
+    debugger
+    output +=span +"\n";
     if (rightIcon.length>0)output += rightIcon + "\n";
+    if (tooltip.length>0) output += '\n<span role="tooltip" id="tooltip" class="tooltip-text">'+tooltip+'</span>';
     output +="</a>";
     return output;
 }
