@@ -262,9 +262,8 @@
                     <input type="text" id="input-right-icon" name="input-right-icon" aria-describedby="input-right-icon-help" placeholder="&lt;i class=&quot;fa-solid fa-angle-right&quot;&gt;&lt;/i&gt;">
                     <p id="input-right-icon-error" class="error-message" role="alert" style="display: none;"></p>
                     <small id="input-right-icon-help" class="help-text">Actualment està preparat per mostrar icones de font-awesome però, tot i que no es mostrin, es pot afegir el text que inguiqui cada llibreria d'icones.</small>
-                </div>
-                
-                <button type="submit" id="submit-form" class="btn btn-primary">
+                </div>    
+                <button type="submit" id="submit-form" class="sr-only">
                     <span>Aplica els canvis</span>
                 </button>
             </form>
@@ -297,16 +296,14 @@
             </section>
             <section id="preview">
                 <div id="prototype-preview">
-                    <div class="field">
-                        
-                    </div>
+                    
                 </div>
                 <button id="toggleDark">
                     <span class="sr-only" data-i18n-key="toggle_theme_sr_only">Canvia entre mode clar i fosc</span>
                     <i class="fa-solid fa-moon"></i>
                     <i class="fa-solid fa-sun"></i>
                 </button>
-                <span id="version">QXO: 0.4.0</span>
+                <span id="version">QXO: 0.6.0</span>
             </section>
 
             <section id="code" class="field">
@@ -318,23 +315,24 @@
         </main>
         <aside class="right-col">
             <h2>Propietats</h2>
-
-            <div class="field">
-                <label for="input-css">Custom.css</label>
-                <textarea id="input-css" name="css" placeholder=""  aria-invalid="false" aria-describedby="input-css-help" ></textarea>
-                <p id="input-css-error" class="error-message" role="alert" style="display: none;"></p>
-                <small id="input-css-help" class="help-text">Tens un full d'estils o vols adaptar al màxim com es veurà aquest element? Aquí pots introduir els estils CSS que necessitis.</small>
-            </div>
-            <div class="field">
-                <label for="input-classes">Classes html</label>
-                <input type="text" id="input-classes" name="classes" placeholder="Ex. sr-only"  aria-invalid="false" aria-describedby="input-classes-help" >
-                <p id="input-classes-error" class="error-message" role="alert" style="display: none;"></p>
-                <small id="input-classes-help" class="help-text">Necessites aplicar algunes classes? Recorda introduir-les al custom.css</small>
-                <ul id="classes-tags" class="unstyled-list">
-                </ul>
-            </div>
-            <div class="field">
-                <fieldset>
+            <div class="params">
+                <div class="field">
+                    <label for="input-css">Custom.css</label>
+                    <textarea id="input-css" name="css" placeholder=""  aria-invalid="false" aria-describedby="input-css-help" ></textarea>
+                    <p id="input-css-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-css-help" class="help-text">Tens un full d'estils o vols adaptar al màxim com es veurà aquest element? Aquí pots introduir els estils CSS que necessitis.</small>
+                    <style id="custom-styles"></style>
+                </div>
+                <div class="field">
+                    <label for="input-classes">Classes html</label>
+                    <input type="text" id="input-classes" name="classes" placeholder="Ex. sr-only"  aria-invalid="false" aria-describedby="input-classes-help" >
+                    <p id="input-classes-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-classes-help" class="help-text">Necessites aplicar algunes classes? Introdueix-les separades amb espais. Recorda introduir-les tambè al custom.css</small>
+                    <ul id="classes-tags" class="unstyled-list">
+                    </ul>
+                </div>
+                <div class="field">
+                    <fieldset>
                         <legend>Estats</legend>
                         <ul class="unstyled-list">
                             <li>
@@ -363,7 +361,9 @@
                             </li>
                         </ul>
                     </fieldset>
+                </div>
             </div>
+
         </aside>
 </body>
 </html>

@@ -355,17 +355,32 @@ body aside{
     border-radius: calc( var(--radius-sm) + 1rem);
     background-color: var(--page-bg);
     box-shadow: var(--base-shadow);
-    overflow-y: auto;
     margin: 1rem;
-  }
-  aside h2{
-    margin-bottom: 1rem;
-  }
+}
 
+aside{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+aside .params,
 aside form{
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-inline: 4px;
+    margin-inline: -4px;
     display: flex;
     flex-direction: column;
     gap:1rem;
+}
+
+aside .params .field:has(#input-css){
+    flex-grow: 1;
+}
+
+aside .params .field:has(#input-css) textarea{
+    flex-grow: 1;
 }
 
 body aside, body main{
@@ -559,3 +574,11 @@ fieldset{
 *:has(>.tooltip-text):focus-within .tooltip-text {
     visibility: visible;
 }
+
+#classes-tags{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;;
+}
+

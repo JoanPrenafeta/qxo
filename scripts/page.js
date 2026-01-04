@@ -4,28 +4,32 @@ function applyChanges(event) {
     const formData = new FormData(event.target);
     var output="";
     var str="";
+    let classList = [];
+    $("#classes-tags").find("li").each(function(){
+        classList.push(this.children[0].id);
+    });
     updateFields(formData);
     switch (formData.get("select-create")) {
         case "input":
             str += '<div class="field">'
             switch (formData.get("select-type")) {
                 case "text":
-                    output+=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    output+=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "));
                     break;
                 case "number":
-                    output+=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-min"),formData.get("input-max"));
+                    output+=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-min"),formData.get("input-max"),classList.toString().replaceAll(",", " "));
                     break;
                 case "email":
-                    output+=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-pattern"));
+                    output+=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-pattern"),classList.toString().replaceAll(",", " "));
                     break;
                 case "textarea":
-                    output+=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("select-resize"),formData.get("input-lines"),formData.get("input-length"));
+                    output+=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("select-resize"),formData.get("input-lines"),formData.get("input-length"),classList.toString().replaceAll(",", " "));
                     break;
                 case "password":
-                    output+=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    output+=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "));
                     break;
                 case "checkbox":
-                    output+=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"));
+                    output+=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "));
                     break;
                 default:
                     break;
@@ -33,24 +37,24 @@ function applyChanges(event) {
         break;
         case "img":
                 str += '<div class="media">'
-                output += generateImage(formData.get("input-src"), formData.get("input-decorative")=="on",  formData.get("input-alt"), formData.get("select-load"), formData.get("select-fit"),formData.get("input-figure")=="on",formData.get("input-figcaption"))
+                output += generateImage(formData.get("input-src"), formData.get("input-decorative")=="on",  formData.get("input-alt"), formData.get("select-load"), formData.get("select-fit"),formData.get("input-figure")=="on",formData.get("input-figcaption"),classList.toString().replaceAll(",", " "))
         break
 
         case "clickable":
             if (formData.get("input-link")=="on"){
                 str += '<div class="link">'
-                output += generateLink(formData.get("select-link-type"), formData.get("input-href"),formData.get("input-span"),formData.get("input-target")=="on",formData.get("input-tooltip"),formData.get("input-left-icon"),formData.get("input-right-icon"));
+                output += generateLink(formData.get("select-link-type"), formData.get("input-href"),formData.get("input-span"),formData.get("input-target")=="on",formData.get("input-tooltip"),formData.get("input-left-icon"),formData.get("input-right-icon"),classList.toString().replaceAll(",", " "));
             }
             else{
-                output += generateButton(formData.get("id"),formData.get("input-span"),formData.get("input-tooltip"),formData.get("input-left-icon"),formData.get("input-right-icon"));
+                output += generateButton(formData.get("id"),formData.get("input-span"),formData.get("input-tooltip"),formData.get("input-left-icon"),formData.get("input-right-icon"),classList.toString().replaceAll(",", " "));
             }
             
         break;
 
     }
     str += output + "</div>"
-    $("#code-preview").val(output)
     $("#prototype-preview").html(str)
+    $("#code-preview").val(output)
 }
 const formulari = document.querySelector('form');
 function updateFields(form=null){
@@ -123,10 +127,11 @@ formulari.addEventListener('input', (event) => {
     }, 600);
 });
 
-function generateTextbox(id,label,placeholder,required, description,showDescription){
+function generateTextbox(id,label,placeholder,required, description,showDescription,classes){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="text" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-help"'
+    if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required"
     output+='>\n';
     output += '<small id="'+id+'-help"';
@@ -134,11 +139,12 @@ function generateTextbox(id,label,placeholder,required, description,showDescript
     output += '>'+description+'</small>';
     return output;
 }
-function generateNumber(id,label,placeholder,required, description,showDescription, min, max){
+function generateNumber(id,label,placeholder,required, description,showDescription, min, max,classes){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="number" id="'+id+'" name="'+id+'" ';
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help"';
+    if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required"
     if(min != null && min.length>0) output+=' min="'+min+'"'
     if(max != null && max.length>0) output+=' max="'+max+'"'
@@ -148,11 +154,12 @@ function generateNumber(id,label,placeholder,required, description,showDescripti
     output += '>'+description+'</small>';
     return output;
 }
-function generateTextarea(id,label,placeholder,required, description,showDescription,resize,lines,maxChars){
+function generateTextarea(id,label,placeholder,required, description,showDescription,resize,lines,maxChars,classes){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<textarea id="'+id+'" name="'+id+'" ';
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help" style="resize:'+resize+';"'
+    if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required"
     if(lines != null && lines.length>0) output+=' rows="'+lines+'"'
     if(maxChars!=null && maxChars.length>0) output+=' max-length="'+maxChars+'" aria-valuemax="'+maxChars+'" aria-valuenow="0"'
@@ -162,10 +169,11 @@ function generateTextarea(id,label,placeholder,required, description,showDescrip
     output += '>'+description+'</small>';
     return output;
 }
-function generateEmail(id,label,placeholder,required, description,showDescription, pattern){
+function generateEmail(id,label,placeholder,required, description,showDescription, pattern,classes){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="email" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-help"'
+    if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required "
     if(pattern != null && pattern.length>0) output+=' pattern="'+pattern+'"'
     output+='>\n';
@@ -174,10 +182,11 @@ function generateEmail(id,label,placeholder,required, description,showDescriptio
     output += '>'+description+'</small>';
     return output;
 }
-function generatePassword(id,label,placeholder,required, description,showDescription){
+function generatePassword(id,label,placeholder,required, description,showDescription,classes){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="password" id="'+id+'" name="'+id+'" ';
+    if(classes != "") output += ' class="'+classes+'"'
     if (required== "on") output+=" required "
     output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help" data-visible="false">\n';
     output += '<small id="'+id+'-help"';
@@ -185,9 +194,10 @@ function generatePassword(id,label,placeholder,required, description,showDescrip
     output += '>'+description+'</small>';
     return output;
 }
-function generateCheckbox(id,label,required, description,showDescription){
+function generateCheckbox(id,label,required, description,showDescription,classes){
     var output = '<div class="inline-input">\n';
     output += '<input type="checkbox" id="'+id+'" name="'+id+'" aria-describedby="'+id+'-help""'
+    if(classes != "") output += ' class="'+classes+'"'
     if (required== "on") output+=" required "
     output+='>\n';
     output += '<label for="'+id+'">'+label+'</label>\n';
@@ -197,7 +207,7 @@ function generateCheckbox(id,label,required, description,showDescription){
     output += '>'+description+'</small>';
     return output;
 }
-function generateImage(image,decorative,alt,loading,fit, figure, figcaption){
+function generateImage(image,decorative,alt,loading,fit, figure, figcaption,classes){
     var output = "";
     if (figure) {
         output += '<figure>\n'
@@ -226,6 +236,7 @@ function generateImage(image,decorative,alt,loading,fit, figure, figcaption){
             break;
     }
     output+=' style="object-fit: ' + fit + '"';
+    if(classes != "") output += ' class="'+classes+'"'
     output += '>';
 
     if (figure) {
@@ -235,7 +246,7 @@ function generateImage(image,decorative,alt,loading,fit, figure, figcaption){
 
     return output
 }
-function generateLink(linkType, href,span,newTab,tooltip,leftIcon, rightIcon){
+function generateLink(linkType, href,span,newTab,tooltip,leftIcon, rightIcon,classes){
     var output = '<a href="';
     switch (linkType) {
         case "external":
@@ -262,6 +273,7 @@ function generateLink(linkType, href,span,newTab,tooltip,leftIcon, rightIcon){
         output+= ' target="self"';
     }
 
+    if(classes != "") output += ' class="'+classes+'"'
     if (tooltip.length==0 && newTab) tooltip="S'obrirà en una pestanya."
 
     if (tooltip.length>0) output += ' aria-describedby="tooltip"'
@@ -274,9 +286,10 @@ function generateLink(linkType, href,span,newTab,tooltip,leftIcon, rightIcon){
     if (tooltip.length>0) output += '\n<span role="tooltip" id="tooltip" class="tooltip-text">'+tooltip+'</span>';
     return output;
 }
-function generateButton(id,span,tooltip,leftIcon, rightIcon){
+function generateButton(id,span,tooltip,leftIcon, rightIcon,classes){
     var output = '<button id="'+id+'"';
     if (tooltip.length>0) output += ' aria-describedby="'+id+'-tooltip"'
+    if(classes != "") output += ' class="'+classes+'"'
     output +=">\n";
     if (leftIcon.length>0)output += leftIcon + "\n";
     output +=span +"\n";
@@ -342,3 +355,30 @@ $("#toggleDark").click(function(){
     applyTheme()
 });
 applyTheme()
+
+$("#input-css").change(function(){
+   $("#custom-styles").html(this.value)
+});
+
+$("#input-classes").change(function(){
+    let classes = this.value.split(" ");
+    $("#classes-tags").find("li").each(function(){
+        classes.push(this.children[0].id)
+    });
+
+   updateClasses(classes)
+   this.value = "";
+});
+
+function updateClasses(classList){
+    var cleanList = new Set(classList)
+    var cleanClassList = [...cleanList].filter(e => e && e.trim() !== "");
+    let str="";
+    cleanClassList.forEach(element => {
+        str += '<li><button id="'+element+'" class="btn btn-primary">'+element+'<i class="fa-solid fa-xmark"></i></button></li>\n';        
+    });
+    $("#classes-tags").html(str)
+    $(formulari).submit();
+}
+
+
