@@ -34,6 +34,14 @@
                     <small id="select-create-help" class="help-text">A partir d'aquesta selecció, es carregaran les preguntes necessàries per generar el codi.</small>
                 </div>
 
+                <div class="field clickable-field">
+                    <div class="inline-input">
+                        <input type="checkbox"  id="input-link"  name="input-link"  aria-describedby="input-link-help" >
+                        <label for="input-link">Ha de redirigir a algun lloc?</label>
+                    </div>
+                    <small id="input-link-help" class="help-text">Si vols que l'usuari viatgi a una altra pàgina o secció, utilitzarem una etiqueta a. Si el que necessites és que passi alguna cosa (com obrir un menú o enviar dades), el millor és un button</small>
+                </div>
+
                 <div class="field input-field">
                     <label for="select-type">Quina mena de camp d'entrada?</label>
                     <select id="select-type" name="select-type" aria-describedby="select-type-help">
@@ -47,11 +55,11 @@
                     <small id="select-type-help" class="help-text">Tot i que puguin mostrar-se similars, cada input té les seves propietats.</small>
                 </div>
 
-                <div class="field input-field">
+                <div class="field input-field button-field">
                     <label for="input-id">Com s'identificarà?</label>
                     <input type="text" id="input-id" name="id" placeholder="nom" aria-invalid="false" aria-describedby="input-id-help">
                     <p id="input-id-error" class="error-message" role="alert" style="display: none;">L'identificador hauria de començar per una lletra. Preferentment amb minúscules. </p>
-                    <small id="input-id-help" class="help-text">L'identificador es necessari per poder identificar l'element, ja sigui en el codi front-end o en la fulla d'estils. Aquest ha de ser únic i no s'ha de repetir en tota la pàgina.</small>
+                    <small id="input-id-help" class="help-text">L'identificador es necessari per poder identificar l'element, ja sigui en el codi o en la fulla d'estils. Aquest ha de ser únic i no s'ha de repetir en tota la pàgina.</small>
                 </div>
 
                 <div class="field input-field">
@@ -161,7 +169,22 @@
                     <label for="input-alt">Què apareix a la imatge?</label>
                     <input type="text" id="input-alt" name="input-alt" aria-describedby="input-alt-help">
                     <p id="input-alt-error" class="error-message" role="alert" style="display: none;"></p>
-                    <small id="input-alt-help" class="help-text">En cas de no ser una imatge decorativa, el text ha de descriure que hi apareix a la imatge. En cas de no poder-se visualitzar la imatge o usar lectors de pantalla. Es mostrarà com un text. Per tant, enlloc de dir: "Logotip de l'entitat" o "Oferta temporal", s'hauria de mostrar directament el que es llegira: "Entitat" o "Portàtil hp per 600€".</small>
+                    <small id="input-alt-help" class="help-text">En cas de no ser una imatge decorativa, el text alternatiu ha de descriure que hi apareix a la imatge. En cas de no poder-se visualitzar la imatge o usar lectors de pantalla. Es mostrarà com un text. Per tant, enlloc de dir: "Logotip de l'entitat" o "Oferta temporal", s'hauria de mostrar directament el que es llegira: "Entitat" o "Portàtil hp per 600€".</small>
+                </div>
+
+                <div class="field image-field custom-field">
+                    <div class="inline-input">
+                    <input type="checkbox" aria-checked="true" id="input-figure"  name="input-figure" aria-describedby="input-figure-help" >
+                    <label for="input-figure">S'ha de mostrar una llegenda?</label>
+                    </div>
+                    <small id="input-figure-help" class="help-text">En cas de mostrar una llegenda, es millor usar un element figure.</small>
+                </div>
+
+                <div class="field image-field custom-field">
+                    <label for="input-figcaption">Què hi ha al peu d'imatge?</label>
+                    <input type="text" id="input-figcaption" name="input-figcaption" aria-describedby="input-figcaption-help">
+                    <p id="input-figcaption-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-figcaption-help" class="help-text">És important que el peu de fotografia no sigui redundant amb el text alternatiu. En cas de ser-ho, es millor deixar el text alternatiu en blanc</small>
                 </div>
 
                 <div class="field image-field">
@@ -186,14 +209,71 @@
                     <small id="select-fit-help" class="help-text">La imatge es deforma? Amb la propietat object-fit, pots escollir com es mostra la imatge</small>
                 </div>
 
-                <input id="submit-form" type="submit" value="Aplica els canvis" class="btn btn-primary">
+                <div class="field link-field button-field">
+                    <label for="input-span">Què ha de mostrar?</label>
+                    <input type="text" id="input-span" name="input-span" aria-describedby="input-span-help" placeholder="Veure tots els esdeveniments">
+                    <p id="input-span-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-span-help" class="help-text">Es important que cada enllaç sigui descriptiu. Per exemple el "veure'n més" es una mala praxi. En el seu lloc, s'hauria de mostrar "Veure més notícies".</small>
+                </div>
+
+                <div class="field link-field">
+                    <label for="select-link-type">Quina mena de redirecció es?</label>
+                    <select id="select-link-type" name="select-link-type" aria-describedby="select-link-type-help">
+                        <option value="external" selected>Enllaç extern</option>
+                        <option value="internal">Enllaç intern</option>
+                        <option value="anchor">Ancla a un component</option>
+                        <option value="tel">Telèfon</option>
+                        <option value="email">Correu electrònic</option>
+                    </select>
+                    <small id="select-fit-help" class="help-text">Tot i que es pot posar directament al src, aquí t'ho facilitem.</small>
+                </div>
+
+                <div class="field link-field">
+                    <label for="input-href">On ha de dirigir?</label>
+                    <input type="text" id="input-href" name="input-href" aria-describedby="input-href-help" placeholder="https://joanprenafeta.github.io/Cool-portfolio/">
+                    <p id="input-href-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-href-help" class="help-text">Introdueix el destí que es posarà al href.</small>
+                </div>
+
+                <div class="field link-field">
+                    <div class="inline-input">
+                        <input type="checkbox"  id="input-target"  name="input-target"  aria-describedby="input-target-help" >
+                        <label for="input-target">S'obra en una nova pestanya?</label>
+                    </div>
+                    <small id="input-target-help" class="help-text">En cas d'obrir-se en una nova pestanya, s'ha d'avisar als usuaris.</small>
+                </div>
+
+                <div class="field link-field button-field">
+                    <label for="input-tooltip">Digues un text d'ajuda</label>
+                    <input type="text" id="input-tooltip" name="input-tooltip" aria-describedby="input-tooltip-help" placeholder="S'obra en una nova pestanya">
+                    <p id="input-tooltip-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-tooltip-help" class="help-text">Aquest text complementari es mostrarà com un tooltip en passar el ratolí sobre l'element.</small>
+                </div>
+
+                <div class="field link-field button-field">
+                    <label for="input-left-icon">Icona de l'esquerra?</label>
+                    <input type="text" id="input-left-icon" name="input-left-icon" aria-describedby="input-left-icon-help" placeholder="&lt;i class=&quot;fa-solid fa-angle-left&quot;&gt;&lt;/i&gt;">
+                    <p id="input-left-icon-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-left-icon-help" class="help-text">Actualment està preparat per mostrar icones de font-awesome però, tot i que no es mostrin, es pot afegir el text que inguiqui cada llibreria d'icones.</small>
+                </div>
+
+                <div class="field link-field button-field">
+                    <label for="input-right-icon">Icona de la dreta?</label>
+                    <input type="text" id="input-right-icon" name="input-right-icon" aria-describedby="input-right-icon-help" placeholder="&lt;i class=&quot;fa-solid fa-angle-right&quot;&gt;&lt;/i&gt;">
+                    <p id="input-right-icon-error" class="error-message" role="alert" style="display: none;"></p>
+                    <small id="input-right-icon-help" class="help-text">Actualment està preparat per mostrar icones de font-awesome però, tot i que no es mostrin, es pot afegir el text que inguiqui cada llibreria d'icones.</small>
+                </div>
+                
+                <button type="submit" id="submit-form" class="btn btn-primary">
+                    <span>Aplica els canvis</span>
+                </button>
             </form>
         </aside>
         <main id="main" class="main-col">
             <section id="tips">
                 <h2>Tips</h2>
                 <ul class="tips-list unstyled-list">
-                    <li class="active">
+                    <li class="active" aria-current="true">
                         <span>1. Utilitza sempre elements HTML semàntics (button, a, input, nav, header, main...) de recórrer a ARIA.</span>
                     </li>
                     <li class="">
@@ -226,7 +306,7 @@
                     <i class="fa-solid fa-moon"></i>
                     <i class="fa-solid fa-sun"></i>
                 </button>
-                <span id="version">QXO: 0.0.2</span>
+                <span id="version">QXO: 0.4.0</span>
             </section>
 
             <section id="code" class="field">

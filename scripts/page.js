@@ -33,8 +33,16 @@ function applyChanges(event) {
         break;
         case "img":
                 str += '<div class="media">'
-                output += generateImage(formData.get("input-src"), formData.get("input-decorative")=="on",  formData.get("input-alt"), formData.get("select-load"), formData.get("select-fit"))
+                output += generateImage(formData.get("input-src"), formData.get("input-decorative")=="on",  formData.get("input-alt"), formData.get("select-load"), formData.get("select-fit"),formData.get("input-figure")=="on",formData.get("input-figcaption"))
         break
+
+        case "clickable":
+            if (formData.get("input-link")=="on"){
+                str += '<div class="link">'
+                output += generateLink(formData.get("select-link-type"), formData.get("input-href"),formData.get("input-span"),formData.get("input-target")=="on",formData.get("input-tooltip"),formData.get("input-left-icon"),formData.get("input-right-icon"));
+            }
+            
+        break;
 
     }
     str += output + "</div>"
@@ -82,22 +90,34 @@ function updateFields(form=null){
             case "img":
                 $(formulari).find(".image-field").show();
                 $(formulari).find(".image-field.custom-field").hide();
-                if (form.get("input-decorative") =="on") $(formulari).find('.image-field:has("#input-alt")').hide();
-                else $(formulari).find('.image-field:has("#input-alt")').show();
+                $(formulari).find('.image-field:has("#input-figure")').show();
+                if (form.get("input-figure") =="on") $(formulari).find('.image-field:has("#input-figcaption")').show();
+                if (form.get("input-decorative") !="on") $(formulari).find('.image-field:has("#input-alt")').show();
+            break;
+
+            case "clickable":
+                $(formulari).find(".clickable-field").show();
+                if (form.get("input-link") =="on") {
+                    $(formulari).find('.link-field').show();
+                }
+                else{
+                    $(formulari).find(".button-field.custom-field").hide();
+                    $(formulari).find(".button-field").show();
+                }
             break;
             default:
             break;
         }
     }
 }
-updateFields()
+updateFields() 
 
 let timeout;
 formulari.addEventListener('input', (event) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
         $("#submit-form").click();
-    }, 300);
+    }, 600);
 });
 
 function generateTextbox(id,label,placeholder,required, description,showDescription){
@@ -174,11 +194,17 @@ function generateCheckbox(id,label,required, description,showDescription){
     output += '>'+description+'</small>';
     return output;
 }
-
-function generateImage(image,decorative,alt,loading,fit){
+function generateImage(image,decorative,alt,loading,fit, figure, figcaption){
     var output = "";
+    if (figure) {
+        output += '<figure>\n'
+        if (figcaption==alt) alt="";
+    }
     output += '<img src="'+image+'"'
-    if (decorative) alt="";
+    if (decorative) {
+        alt="";
+        output += ' role="presentation"'
+    }
     output += ' alt="'+alt+'"';
     switch (loading) {
         case "eager":
@@ -199,8 +225,53 @@ function generateImage(image,decorative,alt,loading,fit){
     output+=' style="object-fit: ' + fit + '"';
     output += '>';
 
+    if (figure) {
+        output += '\n<figcaption>'+figcaption+'</figcaption>';
+        output += '</figure>';
+    }
+
     return output
 }
+function generateLink(linkType, href,span,newTab,tooltip,leftIcon, rightIcon){
+    var output = '<a href="';
+    switch (linkType) {
+        case "external":
+        case "internal":
+            href=href;
+        break;
+        case "anchor":
+            href = "#"+href;
+        break;
+        case "tel":
+            href = "tel:"+href;
+        break;
+        case "anchor":
+            href = "mailto:"+href;
+        break;
+        default:
+        break;
+    }
+    output += href+'"';
+    if (newTab){
+        output+= ' target="_blank" rel="noopener"';
+    }
+    else{
+        output+= ' target="self"';
+    }
+
+    if (tooltip.length==0 && newTab) tooltip="S'obrirà en una pestanya."
+
+    if (tooltip.length>0) output += ' aria-describedby="tooltip"'
+
+    output +=">\n";
+    if (leftIcon.length>0)output += leftIcon + "\n";
+    output +=span;
+    if (tooltip.length>0) output += '\n<span role="tooltip" id="tooltip" class="tooltip-text">'+tooltip+'</span>';
+    if (rightIcon.length>0)output += rightIcon + "\n";
+    output +="</a>";
+    return output;
+}
+
 
 var starterPrimary = new Color(Colors.randomColor());
 
