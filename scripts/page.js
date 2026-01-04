@@ -41,6 +41,9 @@ function applyChanges(event) {
                 str += '<div class="link">'
                 output += generateLink(formData.get("select-link-type"), formData.get("input-href"),formData.get("input-span"),formData.get("input-target")=="on",formData.get("input-tooltip"),formData.get("input-left-icon"),formData.get("input-right-icon"));
             }
+            else{
+                output += generateButton(formData.get("id"),formData.get("input-span"),formData.get("input-tooltip"),formData.get("input-left-icon"),formData.get("input-right-icon"));
+            }
             
         break;
 
@@ -265,11 +268,21 @@ function generateLink(linkType, href,span,newTab,tooltip,leftIcon, rightIcon){
 
     output +=">\n";
     if (leftIcon.length>0)output += leftIcon + "\n";
-    debugger
     output +=span +"\n";
     if (rightIcon.length>0)output += rightIcon + "\n";
-    if (tooltip.length>0) output += '\n<span role="tooltip" id="tooltip" class="tooltip-text">'+tooltip+'</span>';
     output +="</a>";
+    if (tooltip.length>0) output += '\n<span role="tooltip" id="tooltip" class="tooltip-text">'+tooltip+'</span>';
+    return output;
+}
+function generateButton(id,span,tooltip,leftIcon, rightIcon){
+    var output = '<button id="'+id+'"';
+    if (tooltip.length>0) output += ' aria-describedby="'+id+'-tooltip"'
+    output +=">\n";
+    if (leftIcon.length>0)output += leftIcon + "\n";
+    output +=span +"\n";
+    if (rightIcon.length>0)output += rightIcon + "\n";
+    output +="</button>";
+    if (tooltip.length>0) output += '\n<span role="tooltip" id="'+id+'-tooltip" class="tooltip-text">'+tooltip+'</span>';
     return output;
 }
 
