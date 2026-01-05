@@ -191,8 +191,8 @@ a:hover span{
     font-size: var(--font-size-base);
     cursor: pointer;
 }
-.btn:hover,
-.btn:focus{
+.btn:not(:disabled):hover,
+.btn:not(:disabled):focus{
     background-color: var(--text-color);
     color: var(--page-bg);
     text-decoration: underline;
@@ -201,8 +201,8 @@ a:hover span{
 .btn *{
     color: var(--text-color);
 }
-.btn:hover *,
-.btn:focus *{
+.btn:not(:disabled):hover *,
+.btn:not(:disabled):focus *{
     color: var(--page-bg);
 }
 
@@ -214,15 +214,22 @@ a:hover span{
 .btn-primary *{
     color: var(--page-bg);
 }
-.btn-primary:hover,
-.btn-primary:focus{
+.btn-primary:not(:disabled):hover,
+.btn-primary:not(:disabled):focus{
     background-color: var(--primary-brand);
     color: var(--primary-contrast);
 }
 
-.btn-primary:hover *,
-.btn-primary:focus *{
+.btn-primary:not(:disabled):hover *,
+.btn-primary:not(:disabled):focus *{
     color: var(--primary-contrast);
+}
+
+*:disabled,
+*:disabled:hover,
+*:disabled:focus{
+    cursor: no-drop!important;
+    opacity: 0.8;
 }
 
 #toggleDark{
