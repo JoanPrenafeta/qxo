@@ -51,6 +51,7 @@
     --base-gap: 1rem;
     --big-gap: 80px;
     --base-shadow: 0 0 10px color-mix(in srgb, var(--text-color) 16%, transparent);
+    --error-color: #b30000;
 
     --radius-xl: 20px;
     --radius-sm: 4px;
@@ -106,11 +107,14 @@ body.dark{
         /* Variables per al mode fosc */
         --page-bg: #121212;
         --text-color: #ffffff!important;
+        --error-color: #ff6161;
         --header-bg: black;
         --primary-accessible: var(--primary-light-min);
         --secondary-accessible: var(--secondary-light-min);
         --accent-color: var(--primary-accessible);
         accent-color: var(--accent-color);
+        --link-color: var(--primary-accessible);
+
         --link-color-hover: var(--primary-light);
 }
 body.dark .image-theme .dark{
@@ -587,5 +591,33 @@ fieldset{
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.25rem;;
+}
+
+#classes-tags button{
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message{
+    display: none;
+    color: var(--error-color);
+    font-size: var(--font-size-small);
+}
+.field:has([aria-invalid="true"]) .error-message{
+    display: block;
+}
+
+.field:has([aria-invalid="true"]) input,
+.field:has([aria-invalid="true"]) textarea{
+    border-color: var(--error-color);
+}
+
+#actions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 

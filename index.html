@@ -29,7 +29,7 @@
                     <option value="input">Camp d'entrada</option>
                     <option value="img">Imatge</option>
                     <option value="clickable">Element clicable</option>
-                    <option value="select">Llista desplegable</option>
+                    <!--<option value="select">Llista desplegable</option>-->
                     </select>
                     <small id="select-create-help" class="help-text">A partir d'aquesta selecció, es carregaran les preguntes necessàries per generar el codi.</small>
                 </div>
@@ -50,7 +50,7 @@
                         <option value="textarea">Entrada de text llarg</option>
                         <option value="email">Correu electrònic</option>
                         <option value="password">Contrassenya</option>
-                        <option value="radio">Casella de verificació</option>
+                        <option value="checkbox">Casella de verificació</option>
                     </select>
                     <small id="select-type-help" class="help-text">Tot i que puguin mostrar-se similars, cada input té les seves propietats.</small>
                 </div>
@@ -58,14 +58,14 @@
                 <div class="field input-field button-field">
                     <label for="input-id">Com s'identificarà?</label>
                     <input type="text" id="input-id" name="id" placeholder="nom" aria-invalid="false" aria-describedby="input-id-help">
-                    <p id="input-id-error" class="error-message" role="alert" style="display: none;">L'identificador hauria de començar per una lletra. Preferentment amb minúscules. </p>
+                    <p id="input-id-error" class="error-message" role="alert" >L'identificador hauria de començar per una lletra. Preferentment amb minúscules. </p>
                     <small id="input-id-help" class="help-text">L'identificador es necessari per poder identificar l'element, ja sigui en el codi o en la fulla d'estils. Aquest ha de ser únic i no s'ha de repetir en tota la pàgina.</small>
                 </div>
 
                 <div class="field input-field">
                     <label for="input-label">Què esperes obtenir?</label>
                     <input type="text" id="input-label" name="label" placeholder="Nom"  aria-invalid="false" aria-describedby="input-label-help" >
-                    <p id="input-label-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-label-error" class="error-message" role="alert" ></p>
                     <small id="input-label-help" class="help-text">Aquest camp farà referencia al títol que apareixerà al camp. Aquest sempre ha de ser visible per l'usuari.</small>
                 </div>
                 
@@ -80,14 +80,14 @@
                 <div class="field input-field">
                     <label for="input-placeholder">Pots donar una exemple?</label>
                     <input type="text" id="input-placeholder" name="placeholder" placeholder="Joan Prenafeta"  aria-invalid="false" aria-describedby="input-placeholder-help" >
-                    <p id="input-placeholder-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-placeholder-error" class="error-message" role="alert" ></p>
                     <small id="input-placeholder-help" class="help-text">Aquest camp serveix per facilitar la comprensió i entrada del camp.</small>
                 </div>
 
                 <div class="field input-field">
                     <label for="input-description">Per a què serveix aquest camp?</label>
                     <textarea id="input-description" name="description" placeholder="Aquest camp serveix per..."  aria-invalid="false" aria-describedby="input-description-help" ></textarea>
-                    <p id="input-descriptionr-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-descriptionr-error" class="error-message" role="alert" ></p>
                     <small id="input-description-help" class="help-text">Aquest camp fa referència a la descripció que hi ha d'haver a l'input (després pots ocultar-lo).</small>
                 </div>
 
@@ -102,40 +102,40 @@
                 <div class="field input-field">
                     <label for="input-error">Missatge d'error</label>
                     <input type="text" id="input-error" name="error" placeholder="Aquest camp es obligatori"  aria-invalid="false" aria-describedby="input-error-help" >
-                    <p id="input-error-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-error-error" class="error-message" role="alert" ></p>
                     <small id="input-error-help" class="help-text">En cas de tenir una entrada incorrecta, s'ha de mostrar un missatge d'error que ajudi a entendre per què és incorrecte i, si és possible, suggerir una resposta vàlida.</small>
                 </div>
                 
                 <div class="field input-field custom-field">
                     <label for="input-pattern">Ha de tenir algun format en concret?</label>
                     <input type="text" id="input-pattern" name="placeholder" placeholder="[a-zA-Z0-9._%+-]+@mevaempresa\.cat$"  aria-invalid="false" aria-describedby="input-pattern-help" >
-                    <p id="input-pattern-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-pattern-error" class="error-message" role="alert" ></p>
                     <small id="input-pattern-help" class="help-text">Utilitza les expressions regulars per definir un format d'entrada. No és necessari verificar que s'insereixi el format correcte, ja que d'això s'encarrega el control nadiu. És útil si vols definir un filtratge per domini, per exemple.</small>
                 </div>
 
                 <div class="field input-field custom-field">
                     <label for="input-length">Quants caràcters pot tenir com a màxim?</label>
                     <input type="number" id="input-length" name="input-length" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-length-help" >
-                    <p id="input-length-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-length-error" class="error-message" role="alert" ></p>
                     <small id="input-length-help" class="help-text">Aquest camp indica el número de caràcters admesos en aquest camp. És important afegir un aria-valuenow amb el número de caràcters usats. Deixa'l en blanc si no n'hi ha.</small>
                 </div>
                 <div class="field input-field custom-field">
                     <label for="input-min">Quin valor pot tenir com a mínim?</label>
                     <input type="number" id="input-min" name="input-min" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-min-help" >
-                    <p id="input-min-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-min-error" class="error-message" role="alert" ></p>
                     <small id="input-min-help" class="help-text">No es podrà inserir un valor inferior al respòs en aquest camp. Deixa'l en blanc si no n'hi ha.</small>
                 </div>
                 <div class="field input-field custom-field">
                     <label for="input-max">Quin valor pot tenir com a màxim?</label>
                     <input type="number" id="input-max" name="input-max" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-max-help" >
-                    <p id="input-max-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-max-error" class="error-message" role="alert" ></p>
                     <small id="input-max-help" class="help-text">No es podrà inserir un valor superior al respòs en aquest camp. Deixa'l en blanc si no n'hi ha.</small>
                 </div>
 
                 <div class="field input-field custom-field">
                     <label for="input-lines">Quants línies de s'han de mostrar com a mínim?</label>
                     <input type="number" id="input-lines" name="input-lines" placeholder="314" min="0" aria-invalid="false" aria-describedby="input-lines-help" >
-                    <p id="input-lines-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-lines-error" class="error-message" role="alert" ></p>
                     <small id="input-length-help" class="help-text">Aquest camp indica el número de línies de text que es mostrarà com a màxim. Deixa'l en blanc si no n'hi ha.</small>
                 </div>
                 
@@ -153,7 +153,7 @@
                 <div class="field image-field">
                     <label for="input-src">On es troba la imatge?</label>
                     <input type="text" id="input-src" name="input-src" aria-describedby="input-src-help" value="https://imgs.search.brave.com/NZMHgzsU1dqAkk_bE0-rQigss0x1BUOPeqk-gHZq2jc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzYzLzhi/LzA0LzYzOGIwNDBl/NTc1ODgyOTAyYTI2/YjFiZDNkMTU3ZTFi/LmpwZw">
-                    <p id="input-src-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-src-error" class="error-message" role="alert" ></p>
                     <small id="input-src-help" class="help-text">Aquesta imatge no es guardarà enlloc, sols es treballa de manera local.</small>
                 </div>
 
@@ -168,7 +168,7 @@
                 <div class="field image-field custom-field">
                     <label for="input-alt">Què apareix a la imatge?</label>
                     <input type="text" id="input-alt" name="input-alt" aria-describedby="input-alt-help">
-                    <p id="input-alt-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-alt-error" class="error-message" role="alert" ></p>
                     <small id="input-alt-help" class="help-text">En cas de no ser una imatge decorativa, el text alternatiu ha de descriure que hi apareix a la imatge. En cas de no poder-se visualitzar la imatge o usar lectors de pantalla. Es mostrarà com un text. Per tant, enlloc de dir: "Logotip de l'entitat" o "Oferta temporal", s'hauria de mostrar directament el que es llegira: "Entitat" o "Portàtil hp per 600€".</small>
                 </div>
 
@@ -183,7 +183,7 @@
                 <div class="field image-field custom-field">
                     <label for="input-figcaption">Què hi ha al peu d'imatge?</label>
                     <input type="text" id="input-figcaption" name="input-figcaption" aria-describedby="input-figcaption-help">
-                    <p id="input-figcaption-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-figcaption-error" class="error-message" role="alert" ></p>
                     <small id="input-figcaption-help" class="help-text">És important que el peu de fotografia no sigui redundant amb el text alternatiu. En cas de ser-ho, es millor deixar el text alternatiu en blanc</small>
                 </div>
 
@@ -212,7 +212,7 @@
                 <div class="field link-field button-field">
                     <label for="input-span">Què ha de mostrar?</label>
                     <input type="text" id="input-span" name="input-span" aria-describedby="input-span-help" placeholder="Veure tots els esdeveniments">
-                    <p id="input-span-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-span-error" class="error-message" role="alert" ></p>
                     <small id="input-span-help" class="help-text">Es important que cada enllaç sigui descriptiu. Per exemple el "veure'n més" es una mala praxi. En el seu lloc, s'hauria de mostrar "Veure més notícies".</small>
                 </div>
 
@@ -231,7 +231,7 @@
                 <div class="field link-field">
                     <label for="input-href">On ha de dirigir?</label>
                     <input type="text" id="input-href" name="input-href" aria-describedby="input-href-help" placeholder="https://joanprenafeta.github.io/Cool-portfolio/">
-                    <p id="input-href-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-href-error" class="error-message" role="alert" ></p>
                     <small id="input-href-help" class="help-text">Introdueix el destí que es posarà al href.</small>
                 </div>
 
@@ -246,21 +246,21 @@
                 <div class="field link-field button-field">
                     <label for="input-tooltip">Digues un text d'ajuda</label>
                     <input type="text" id="input-tooltip" name="input-tooltip" aria-describedby="input-tooltip-help" placeholder="S'obra en una nova pestanya">
-                    <p id="input-tooltip-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-tooltip-error" class="error-message" role="alert" ></p>
                     <small id="input-tooltip-help" class="help-text">Aquest text complementari es mostrarà com un tooltip en passar el ratolí sobre l'element.</small>
                 </div>
 
                 <div class="field link-field button-field">
                     <label for="input-left-icon">Icona de l'esquerra?</label>
                     <input type="text" id="input-left-icon" name="input-left-icon" aria-describedby="input-left-icon-help" placeholder="&lt;i class=&quot;fa-solid fa-angle-left&quot;&gt;&lt;/i&gt;">
-                    <p id="input-left-icon-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-left-icon-error" class="error-message" role="alert" ></p>
                     <small id="input-left-icon-help" class="help-text">Actualment està preparat per mostrar icones de font-awesome però, tot i que no es mostrin, es pot afegir el text que inguiqui cada llibreria d'icones.</small>
                 </div>
 
                 <div class="field link-field button-field">
                     <label for="input-right-icon">Icona de la dreta?</label>
                     <input type="text" id="input-right-icon" name="input-right-icon" aria-describedby="input-right-icon-help" placeholder="&lt;i class=&quot;fa-solid fa-angle-right&quot;&gt;&lt;/i&gt;">
-                    <p id="input-right-icon-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-right-icon-error" class="error-message" role="alert" ></p>
                     <small id="input-right-icon-help" class="help-text">Actualment està preparat per mostrar icones de font-awesome però, tot i que no es mostrin, es pot afegir el text que inguiqui cada llibreria d'icones.</small>
                 </div>    
                 <button type="submit" id="submit-form" class="sr-only">
@@ -303,14 +303,27 @@
                     <i class="fa-solid fa-moon"></i>
                     <i class="fa-solid fa-sun"></i>
                 </button>
-                <span id="version">QXO: 0.6.0</span>
+                <span id="version">QXO: 0.8.0</span>
             </section>
 
             <section id="code" class="field">
                 <label for="code-preview">Previsualitzador de codi html</label>
-                <textarea id="code-preview" name="css" placeholder=""  aria-invalid="false" aria-describedby="code-preview-help"  rows="5"></textarea>
+                <textarea id="code-preview" name="css" placeholder=""  aria-invalid="false" aria-describedby="code-preview-help"  rows="5" disabled aria-disabled="true"></textarea>
                 <small id="code-preview-help" class="help-text">Aqui pots visualitzar el codi html referent al component utilitzat.</small>
             </section>
+            <div id="actions">
+                <a href="https://www.figma.com/community/file/1590051526966498881" target="_blank" rel="noopener" aria-describedby="tooltip-figma">
+                <i class="fa-brands fa-figma"></i>
+                QXO - Accessible library
+                </a>
+                <span role="tooltip" id="tooltip-figma" class="tooltip-text">S'obrirà en una pestanya.</span>
+
+                <button id="btn-clipboard" class="btn btn-primary">
+                <i class="fa-solid fa-clipboard"></i>
+                <span class="sr-only">Copia el codi al portapapers</span>
+                </button>
+
+            </div>
 
         </main>
         <aside class="right-col">
@@ -319,14 +332,14 @@
                 <div class="field">
                     <label for="input-css">Custom.css</label>
                     <textarea id="input-css" name="css" placeholder=""  aria-invalid="false" aria-describedby="input-css-help" ></textarea>
-                    <p id="input-css-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-css-error" class="error-message" role="alert" ></p>
                     <small id="input-css-help" class="help-text">Tens un full d'estils o vols adaptar al màxim com es veurà aquest element? Aquí pots introduir els estils CSS que necessitis.</small>
                     <style id="custom-styles"></style>
                 </div>
                 <div class="field">
                     <label for="input-classes">Classes html</label>
                     <input type="text" id="input-classes" name="classes" placeholder="Ex. sr-only"  aria-invalid="false" aria-describedby="input-classes-help" >
-                    <p id="input-classes-error" class="error-message" role="alert" style="display: none;"></p>
+                    <p id="input-classes-error" class="error-message" role="alert" ></p>
                     <small id="input-classes-help" class="help-text">Necessites aplicar algunes classes? Introdueix-les separades amb espais. Recorda introduir-les tambè al custom.css</small>
                     <ul id="classes-tags" class="unstyled-list">
                     </ul>
@@ -339,18 +352,6 @@
                                 <div class="inline-input">
                                 <input type="checkbox"  id="input-disabled"  name="disabled">
                                 <label for="input-disabled">Deshabilitat</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="inline-input">
-                                <input type="checkbox"  id="input-hover"  name="hover">
-                                <label for="input-hover">Hover</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="inline-input">
-                                <input type="checkbox"  id="input-focus"  name="focus">
-                                <label for="input-focus">Focus</label>
                                 </div>
                             </li>
                             <li>

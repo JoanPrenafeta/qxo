@@ -10,27 +10,28 @@ function applyChanges(event) {
     });
     updateFields(formData);
     var disabled = $("#input-disabled")[0].checked;
+    var invalid = $("#input-entrada-incorrecta")[0].checked;
     switch (formData.get("select-create")) {
         case "input":
             str += '<div class="field">'
             switch (formData.get("select-type")) {
                 case "text":
-                    output+=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "),disabled);
+                    output+=generateTextbox(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "),disabled,invalid,formData.get("error"));
                     break;
                 case "number":
-                    output+=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-min"),formData.get("input-max"),classList.toString().replaceAll(",", " "),disabled);
+                    output+=generateNumber(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-min"),formData.get("input-max"),classList.toString().replaceAll(",", " "),disabled,invalid,formData.get("error"));
                     break;
                 case "email":
-                    output+=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-pattern"),classList.toString().replaceAll(",", " "),disabled);
+                    output+=generateEmail(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("input-pattern"),classList.toString().replaceAll(",", " "),disabled,invalid,formData.get("error"));
                     break;
                 case "textarea":
-                    output+=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("select-resize"),formData.get("input-lines"),formData.get("input-length"),classList.toString().replaceAll(",", " "),disabled);
+                    output+=generateTextarea(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),formData.get("select-resize"),formData.get("input-lines"),formData.get("input-length"),classList.toString().replaceAll(",", " "),disabled,invalid,formData.get("error"));
                     break;
                 case "password":
-                    output+=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "),disabled);
+                    output+=generatePassword(formData.get("id"),formData.get("label"),formData.get("placeholder"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "),disabled,invalid,formData.get("error"));
                     break;
                 case "checkbox":
-                    output+=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "),disabled);
+                    output+=generateCheckbox(formData.get("id"),formData.get("label"),formData.get("required"),formData.get("description"),formData.get("show-description"),classList.toString().replaceAll(",", " "),disabled,invalid,formData.get("error"));
                     break;
                 default:
                     break;
@@ -90,6 +91,7 @@ function updateFields(form=null){
                     case "password":
                         break;
                     case "checkbox":
+                        $(formulari).find('.input-field:has("#input-placeholder")').hide();
                         break;
                     default:
                         break;
@@ -128,90 +130,122 @@ formulari.addEventListener('input', (event) => {
     }, 600);
 });
 
-function generateTextbox(id,label,placeholder,required, description,showDescription,classes,disabled){
+function generateTextbox(id,label,placeholder,required, description,showDescription,classes,disabled,invalid,errorMessage){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="text" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-help"'
+    output += '<input type="text" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-'
+    if (invalid) output+= 'error"'
+    else output += 'help"'
     if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required"
     if (disabled) output += ' disabled aria-disabled="true"'
+    if (invalid) output += ' aria-invalid="true"'
     output+='>\n';
-    output += '<small id="'+id+'-help"';
-    if (showDescription!== "on")  output+=' class="sr-only" ';
+    output += '<small id="'+id+'-help" class="help-text';
+    if (showDescription!== "on")  output+='  sr-only';
+    output += '"';
     output += '>'+description+'</small>';
+    output += '\n<small id="'+id+'-error" class="error-message" role="alert">'+errorMessage+'</small>'
     return output;
 }
-function generateNumber(id,label,placeholder,required, description,showDescription, min, max,classes,disabled){
+function generateNumber(id,label,placeholder,required, description,showDescription, min, max,classes,disabled,invalid,errorMessage){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="number" id="'+id+'" name="'+id+'" ';
-    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help"';
+    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-'
+    if (invalid) output+= 'error"'
+    else output += 'help"'
     if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required"
     if (disabled) output += ' disabled aria-disabled="true"'
+    if (invalid) output += ' aria-invalid="true"'
     if(min != null && min.length>0) output+=' min="'+min+'"'
     if(max != null && max.length>0) output+=' max="'+max+'"'
     output+='>\n';
-    output += '<small id="'+id+'-help"';
-    if (showDescription!== "on")  output+=' class="sr-only" ';
+    output += '<small id="'+id+'-help" class="help-text';
+    if (showDescription!== "on")  output+='  sr-only';
+    output += '"';
     output += '>'+description+'</small>';
+    output += '\n<small id="'+id+'-error" class="error-message" role="alert">'+errorMessage+'</small>'
     return output;
 }
-function generateTextarea(id,label,placeholder,required, description,showDescription,resize,lines,maxChars,classes,disabled){
+function generateTextarea(id,label,placeholder,required, description,showDescription,resize,lines,maxChars,classes,disabled,invalid,errorMessage){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<textarea id="'+id+'" name="'+id+'" ';
-    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help" style="resize:'+resize+';"'
+    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-'
+    if (invalid) output+= 'error"'
+    else output += 'help"'
+    output+= ' style="resize:'+resize+';"'
     if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required"
     if (disabled) output += ' disabled aria-disabled="true"'
+    if (invalid) output += ' aria-invalid="true"'
     if(lines != null && lines.length>0) output+=' rows="'+lines+'"'
     if(maxChars!=null && maxChars.length>0) output+=' max-length="'+maxChars+'" aria-valuemax="'+maxChars+'" aria-valuenow="0"'
     output+='></textarea>\n';
-    output += '<small id="'+id+'-help"';
-    if (showDescription!== "on")  output+=' class="sr-only" ';
+    output += '<small id="'+id+'-help" class="help-text';
+    if (showDescription!== "on")  output+='  sr-only';
+    output += '"';
     output += '>'+description+'</small>';
+    output += '\n<small id="'+id+'-error" class="error-message" role="alert">'+errorMessage+'</small>'
     return output;
 }
-function generateEmail(id,label,placeholder,required, description,showDescription, pattern,classes,disabled){
+function generateEmail(id,label,placeholder,required, description,showDescription, pattern,classes,disabled,invalid,errorMessage){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
-    output += '<input type="email" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-help"'
+    output += '<input type="email" id="'+id+'" name="'+id+'" placeholder="'+placeholder+'" aria-describedby="'+id+'-'
+    if (invalid) output+= 'error"'
+    else output += 'help"'
     if(classes != "") output += ' class="'+classes+'"'
     if (required == "on") output+=" required "
     if (disabled) output += ' disabled aria-disabled="true"'
+    if (invalid) output += ' aria-invalid="true"'
     if(pattern != null && pattern.length>0) output+=' pattern="'+pattern+'"'
     output+='>\n';
-    output += '<small id="'+id+'-help"';
-    if (showDescription!== "on")  output+=' class="sr-only" ';
+    output += '<small id="'+id+'-help" class="help-text';
+    if (showDescription!== "on")  output+='  sr-only';
+    output += '"';
     output += '>'+description+'</small>';
+    output += '\n<small id="'+id+'-error" class="error-message" role="alert">'+errorMessage+'</small>'
     return output;
 }
-function generatePassword(id,label,placeholder,required, description,showDescription,classes,disabled){
+function generatePassword(id,label,placeholder,required, description,showDescription,classes,disabled,invalid,errorMessage){
     var output = "";
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '<input type="password" id="'+id+'" name="'+id+'" ';
     if(classes != "") output += ' class="'+classes+'"'
     if (required== "on") output+=" required "
     if (disabled) output += ' disabled aria-disabled="true"'
-    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-help" data-visible="false">\n';
-    output += '<small id="'+id+'-help"';
-    if (showDescription!== "on") output+=' class="sr-only" ';
+    if (invalid) output += ' aria-invalid="true"'
+    output += 'placeholder="'+placeholder+'" aria-describedby="'+id+'-'
+    if (invalid) output+= 'error"'
+    else output += 'help"'
+    output += ' data-visible="false">\n';
+    output += '<small id="'+id+'-help" class="help-text';
+    if (showDescription!== "on")  output+='  sr-only';
+    output += '"';
     output += '>'+description+'</small>';
+    output += '\n<small id="'+id+'-error" class="error-message" role="alert">'+errorMessage+'</small>'
     return output;
 }
-function generateCheckbox(id,label,required, description,showDescription,classes,disabled){
+function generateCheckbox(id,label,required, description,showDescription,classes,disabled,invalid,errorMessage){
     var output = '<div class="inline-input">\n';
-    output += '<input type="checkbox" id="'+id+'" name="'+id+'" aria-describedby="'+id+'-help""'
+    output += '<input type="checkbox" id="'+id+'" name="'+id+'" aria-describedby="'+id+'-'
+    if (invalid) output+= 'error"'
+    else output += 'help"'
     if(classes != "") output += ' class="'+classes+'"'
     if (required== "on") output+=" required "
     if (disabled) output += ' disabled aria-disabled="true"'
+    if (invalid) output += ' aria-invalid="true"'
     output+='>\n';
     output += '<label for="'+id+'">'+label+'</label>\n';
     output += '</div>\n'
-    output += '<small id="'+id+'-help"';
-    if (showDescription!== "on") output+=' class="sr-only" ';
+    output += '<small id="'+id+'-help" class="help-text';
+    if (showDescription!== "on")  output+='  sr-only';
+    output += '"';
     output += '>'+description+'</small>';
+    output += '\n<small id="'+id+'-error" class="error-message" role="alert">'+errorMessage+'</small>'
     return output;
 }
 function generateImage(image,decorative,alt,loading,fit, figure, figcaption,classes,disabled){
@@ -405,27 +439,20 @@ function removeClass(e){
 }
 $("#input-disabled").change(function(){
     $(formulari).submit();
-})
+});
 
-$("#input-hover").change(function(){
-        var target = $("#prototype-preview").find("input");
-        if (target.length==0){
-            target = $("#prototype-preview").find("textarea");
-        }
-        if (target.length==0){
-            target = $("#prototype-preview").find("link");
-        }
-        if (target.length==0){
-            target = $("#prototype-preview").find("button");
-        }
-        if (target.length==0){
-            target = $("#prototype-preview").find("figure");
-        }
-        if (target.length==0){
-            target = $("#prototype-preview").find("img");
-        }
+$("#input-entrada-incorrecta").change(function(){
+    $(formulari).submit();
+});
 
-        if (target.length>0){
-            debugger
-        }
-})
+$("#btn-clipboard").click(function(){
+    var component = $("#code-preview").val()
+    navigator.clipboard.writeText(component)
+    .then(() => {
+      alert("Text copiat correctament!");
+    })
+    .catch(err => {
+      console.error("Error en copiar el text: ", err);
+    });
+    
+});
