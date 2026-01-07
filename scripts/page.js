@@ -456,3 +456,48 @@ $("#btn-clipboard").click(function(){
     });
     
 });
+
+const tipsComponent = $("#tips ul");
+let tips = [];
+let activeTip=0;
+let tipInterval;
+
+function startTips(){
+    if (tipsComponent!=null){
+        tips = shuffle(tipsComponent.find("li"));
+    }
+    $(tips[activeTip]).prop("ariaCurrent","true");
+    startTimer()
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+$("#prevTip").click(function(){
+    $(tips[activeTip]).prop("ariaCurrent","false");
+    activeTip = (activeTip - 1 + tips.length) % tips.length;
+    $(tips[activeTip]).prop("ariaCurrent","true");
+    startTimer()
+});
+$("#nextTip").click(function(){
+    $(tips[activeTip]).prop("ariaCurrent","false");
+    activeTip = (activeTip + 1) % tips.length;
+    $(tips[activeTip]).prop("ariaCurrent","true");
+    startTimer()
+});
+
+function startTimer() {
+    clearInterval(tipInterval);
+    tipInterval = setInterval(() => {
+        $(tips[activeTip]).prop("ariaCurrent","false");
+        activeTip = (activeTip + 1) % tips.length;
+        $(tips[activeTip]).prop("ariaCurrent","true");
+    }, 7000);
+}
+
+startTips();

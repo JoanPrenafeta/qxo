@@ -2,7 +2,7 @@ let userLanguage = navigator.language || navigator.userLanguage;
 let DEFAULT_LANG = 'ca';
 var link = window.location.href;
 let translationsMap = new Map();
-
+/* 
 function loadTranslations(langCode) {
     const filePath = "https://joanprenafeta.github.io/Cool-portfolio/translations/"+langCode+".xml";
     const xhr = new XMLHttpRequest();
@@ -103,4 +103,4 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialLang = getInitialLanguage(); 
     loadTranslations(initialLang);
     updateLanguageSelector(initialLang); 
-});
+}); */

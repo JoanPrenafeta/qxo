@@ -429,7 +429,7 @@ main #tips .tips-list{
     flex-grow: 1;
 }
 
-main #tips .tips-list li:not(.active){
+main #tips .tips-list li:not([aria-current="true"]){
     display: none;
 }
 
