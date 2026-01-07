@@ -497,7 +497,7 @@ function startTimer() {
         $(tips[activeTip]).prop("ariaCurrent","false");
         activeTip = (activeTip + 1) % tips.length;
         $(tips[activeTip]).prop("ariaCurrent","true");
-    }, 7000);
+    }, 11000);
 }
 
 startTips();
